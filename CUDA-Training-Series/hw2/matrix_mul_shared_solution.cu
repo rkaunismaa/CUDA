@@ -59,7 +59,6 @@ int main(){
 
   float *h_A, *h_B, *h_C, *d_A, *d_B, *d_C;
 
-
   // these are just for timing
   clock_t t0, t1, t2;
   double t1sum=0.0;
@@ -86,6 +85,7 @@ int main(){
   cudaMalloc(&d_B, DSIZE*DSIZE*sizeof(float));
   cudaMalloc(&d_C, DSIZE*DSIZE*sizeof(float));
   cudaCheckErrors("cudaMalloc failure");
+
   cudaMemcpy(d_A, h_A, DSIZE*DSIZE*sizeof(float), cudaMemcpyHostToDevice);
   cudaMemcpy(d_B, h_B, DSIZE*DSIZE*sizeof(float), cudaMemcpyHostToDevice);
   cudaCheckErrors("cudaMemcpy H2D failure");

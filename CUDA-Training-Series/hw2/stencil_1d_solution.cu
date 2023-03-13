@@ -3,11 +3,13 @@
 
 using namespace std;
 
-#define N 4096
+// #define N 4096
+#define N 8192
 #define RADIUS 3
 #define BLOCK_SIZE 16
 
 __global__ void stencil_1d(int *in, int *out) {
+
     __shared__ int temp[BLOCK_SIZE + 2 * RADIUS];
     int gindex = threadIdx.x + blockIdx.x * blockDim.x;
     int lindex = threadIdx.x + RADIUS;
@@ -36,6 +38,7 @@ void fill_ints(int *x, int n) {
 }
 
 int main(void) {
+
   int *in, *out; // host copies of a, b, c
   int *d_in, *d_out; // device copies of a, b, c
   int size = (N + 2*RADIUS) * sizeof(int);
@@ -73,5 +76,7 @@ int main(void) {
   free(in); free(out);
   cudaFree(d_in); cudaFree(d_out);
   printf("Success!\n");
+
   return 0;
+
 }
