@@ -27,3 +27,5 @@ The primary take away is USE A MAKEFILE. The stuff in tasks.json just does not w
 
 Man, I like that! When I run 'git push origin main', I no longer have to submit my credentials every time. Visual Studio Code has saved that for me, and now it just works.
 
+4:54pm Right now I am thinking to go through the CUDA Programming Guide as my primary resource. 
+
