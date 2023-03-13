@@ -1,32 +1,4 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+.vscode/
+CUDA-Training-Series/hw1/hello_solution
+CUDA-Training-Series/hw1/matrix_mul_solution
+CUDA-Training-Series/hw1/vector_add_solution
