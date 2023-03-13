@@ -25,3 +25,5 @@ The primary take away is USE A MAKEFILE. The stuff in tasks.json just does not w
 
 11:46am At this point, I have the code in /CUDA-Training-Series/hw1/matrix_mul_solution.cu running successfully with the cuda debugger. Nice!
 
+Man, I like that! When I run 'git push origin main', I no longer have to submit my credentials every time. Visual Studio Code has saved that for me, and now it just works.
+

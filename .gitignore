@@ -2,3 +2,10 @@
 CUDA-Training-Series/hw1/hello_solution
 CUDA-Training-Series/hw1/matrix_mul_solution
 CUDA-Training-Series/hw1/vector_add_solution
+
+CUDA-Training-Series/hw2/matrix_mul_shared_solution
+CUDA-Training-Series/hw2/stencil_1d_solution
+
+CUDA-Training-Series/hw3/vector_add_solution
+
+CUDA-Training-Series/hw4/matrix_sums_solution
