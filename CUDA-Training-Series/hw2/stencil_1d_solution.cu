@@ -65,10 +65,10 @@ int main(void) {
   for (int i = 0; i < N + 2*RADIUS; i++) {
     if (i<RADIUS || i>=N+RADIUS){
       if (out[i] != 1)
-    	printf("Mismatch at index %d, was: %d, should be: %d\n", i, out[i], 1);
+    	  printf("Mismatch at index %d, was: %d, should be: %d\n", i, out[i], 1);
     } else {
       if (out[i] != 1 + 2*RADIUS)
-    	printf("Mismatch at index %d, was: %d, should be: %d\n", i, out[i], 1 + 2*RADIUS);
+    	  printf("Mismatch at index %d, was: %d, should be: %d\n", i, out[i], 1 + 2*RADIUS);
     }
   }
 
