@@ -43,7 +43,7 @@ make: *** [Makefile:369: GLSLProgram.o] Error 255
 
 So what exactly is going on here? Both examples have a ./vscode subfolder. 
 
-Ah, ok. I think I see the problem. Looking at the c_cpp_properties.json file of either one, there is a:
+Ah, ok. I think I see the problem. Looking at the .vscode/c_cpp_properties.json file of either one, there is a:
 
  "includePath": [
             "${workspaceFolder}/**",
@@ -53,6 +53,8 @@ Ah, ok. I think I see the problem. Looking at the c_cpp_properties.json file of 
 ... which of course this repo does not have. So I am going to dump that in here, then try again. 
 
 Ok, nice, that was the problem. They now both compile and run without any problems. 
+
+Hmm I killed the .vscode sub folder in both folders, and I can still compile without any problems. Nice. I also noticed when I removed them, nothing changed when I ran 'git status' and that's probably because the '.' prefix in the name '.vscode' makes the folder hidden. 
 
 
 

@@ -11,7 +11,7 @@ CUDA-Training-Series/hw3/vector_add_solution
 CUDA-Training-Series/hw4/matrix_sums_solution
 
 NVIDIA/cuda-samples/bin/
-# NVIDIA/cuda-samples/Samples/5_Domain_Specific/Mandelbrot/Mandelbrot
-# NVIDIA/cuda-samples/Samples/5_Domain_Specific/Mandelbrot/*.o
-# NVIDIA/cuda-samples/Samples/5_Domain_Specific/smokeParticles/smokeParticles
-# NVIDIA/cuda-samples/Samples/5_Domain_Specific/smokeParticles/*.o
+NVIDIA/cuda-samples/Samples/5_Domain_Specific/Mandelbrot/Mandelbrot
+NVIDIA/cuda-samples/Samples/5_Domain_Specific/Mandelbrot/*.o
+NVIDIA/cuda-samples/Samples/5_Domain_Specific/smokeParticles/smokeParticles
+NVIDIA/cuda-samples/Samples/5_Domain_Specific/smokeParticles/*.o
