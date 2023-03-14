@@ -59,6 +59,7 @@ Hmm I killed the .vscode sub folder in both folders, and I can still compile wit
 10:37am As you continue to work through the NVIDIA cuda-samples, you will learn what to pay attention to as you read the code and run the examples. It's an iterative process that show's you all the CUDA stuff you have no idea about, as well as the quirks when running them in Visual Studio Code on Ubuntu. 
 
 11:17am So I am actualy going to go back over the slides in the CUDA Training Series. 
+
 12:19pm Meh Reading the CUDA C++ Programming Guide.
 
 
