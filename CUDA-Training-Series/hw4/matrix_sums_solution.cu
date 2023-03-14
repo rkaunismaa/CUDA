@@ -48,6 +48,7 @@ bool validate(float *data, size_t sz){
 }
 
 int main(){
+  
   float *h_A, *h_sums, *d_A, *d_sums;
   h_A = new float[DSIZE*DSIZE];  // allocate space for data in host memory
   h_sums = new float[DSIZE]();
