@@ -24,6 +24,14 @@ NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMulDrv
 NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMulDrv.o
 NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/data/
 NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMul_kernel64.fatbin
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAdd/vectorAdd
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAdd/vectorAdd.o
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAddDrv
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAddDrv.o
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/data/vectorAdd_kernel64.fatbin
+NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAdd_kernel64.fatbin
+
+
 
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/bandwidthTest
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/*.o
