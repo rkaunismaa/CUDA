@@ -29,3 +29,30 @@ Man, I like that! When I run 'git push origin main', I no longer have to submit 
 
 4:54pm Right now I am thinking to go through the CUDA Programming Guide as my primary resource. 
 
+## Tuesday, March 14, 2023
+
+Playing with smokeParticles and Mandelbrot of NVIDIA/cuda-samples/Samples/5_Domain_Specific. Both example folders were copied from /Data/Documents/Github/NVIDIA/cuda-samples/Samples. Dropping into the terminal of either folder and running 'make clean' and then 'make' is able to successfully compile the target example and then run them without problems. However, when I copy them from that folder into this repo, and do the same, it does not work. Running 'make' in either produces the same error:
+
+>>> GCC Version is greater or equal to 5.0.0 <<<
+/usr/local/cuda/bin/nvcc -ccbin g++ -I../../../Common -m64 --std=c++14 --threads 0 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_90,code=sm_90 -gencode arch=compute_90,code=compute_90 -o GLSLProgram.o -c GLSLProgram.cpp
+GLSLProgram.cpp:30:10: fatal error: helper_gl.h: No such file or directory
+   30 | #include <helper_gl.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:369: GLSLProgram.o] Error 255
+
+So what exactly is going on here? Both examples have a ./vscode subfolder. 
+
+Ah, ok. I think I see the problem. Looking at the c_cpp_properties.json file of either one, there is a:
+
+ "includePath": [
+            "${workspaceFolder}/**",
+            "${workspaceFolder}/../../../Common"
+        ],
+
+... which of course this repo does not have. So I am going to dump that in here, then try again. 
+
+Ok, nice, that was the problem. They now both compile and run without any problems. 
+
+
+
