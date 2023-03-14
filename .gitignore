@@ -12,6 +12,15 @@ CUDA-Training-Series/hw4/matrix_sums_solution
 
 NVIDIA/cuda-samples/bin/
 
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMul/matrixMul
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMul/matrixMul.o
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMulDrv
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMulDrv.o
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/data/
+NVIDIA/cuda-samples/Samples/0_Introduction/matrixMulDrv/matrixMul_kernel64.fatbin
+
+
+
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/bandwidthTest
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/*.o
 NVIDIA/cuda-samples/Samples/1_Utilities/deviceQuery/deviceQuery
