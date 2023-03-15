@@ -64,7 +64,7 @@ Hmm I killed the .vscode sub folder in both folders, and I can still compile wit
 
 # Wednesday, March 15, 2023
 
-Going through lesson 3 of the CUDA Training Series. In the video '3) CUDA Optimization (1 of 2)' start listening at round 40 minutes, which explains Launch Configuration. 'GPU Latency Hiding' begins around 51:30. (64 warps per multiprocessor maximum) Each warp is 32 threads.
+Going through lesson 3 of the CUDA Training Series. In the video '3) CUDA Optimization (1 of 2)' start listening at round 40 minutes, which explains Launch Configuration. 'GPU Latency Hiding' begins around 51:30. (64 warps per multiprocessor maximum) Each warp is 32 threads. Instructiions are executed in groups of 32 threads, so they are issued warp by warp.
 
 Wow. I have Github CoPilot running and it is amazing what it is able to generate. I am going to have to learn how to use it! 
 
