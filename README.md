@@ -62,5 +62,8 @@ Hmm I killed the .vscode sub folder in both folders, and I can still compile wit
 
 12:19pm Meh Reading the CUDA C++ Programming Guide.
 
+# Wednesday, March 15, 2023
+
+Going through lesson 3 of the CUDA Training Series. In the video '3) CUDA Optimization (1 of 2)' start listening at round 40 minutes, which explains Launch Configuration. 'GPU Latency Hiding' begins around 51:30. (64 warps per multiprocessor maximum) Each warp is 32 threads.
 
 
