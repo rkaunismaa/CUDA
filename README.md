@@ -72,4 +72,10 @@ I think I will opt to pay for it once this trial period is over.
 
 It KNOWS I am writing CUDA code, and it is able to generate CUDA code for me. And it has generated some of these comments for me.! I am stunned at its predictive abilities.
 
+# Thursday, March 16, 2023
+
+Wow, did I ever waste a lot of time today. I was attempting to step through the CUDA-PROGRAMS/Chapter01/gpusum/gpusum.cu program in the "Programming in Parallel with CUDA' book using the repo I pulled down a few days ago. This repo was updated to work with CUDA 12.1. This example uses Thrust, which I have not yet used. After much messing with the makefile, I was able to compile the program, but when I ran it, it failed with the error when it tried to do the thrust call. After much dicking around, I eventuall tried checking out that repo from the branch I created on '2022-06-11' and it worked. So I am going to go back to that branch and start from there. Damnit, I hate it when I waste time like that.
+
+And once again, I am stunned at how good CoPilot is at generating these comments for me. I am going to have to learn how to use it!
+
 

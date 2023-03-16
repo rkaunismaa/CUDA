@@ -7,10 +7,7 @@
 // cx stands for CUDA Examples, these are bits of code used by the examples
 // Comments are welcome please feel free to send emails to me.
 // Richard Ansorge, rea1@cam.ac.uk
-// version 2.50 February 2023 
-
-// work around pinned memory issue in CUDA 12 refeding the constant to value 11
-// is using SDK s up to 11.8 by editing this file or defining on command line.
+// version 2.00 June 2020
 
 // these for visual studio
 #pragma warning( disable : 4244)  // vebose thrust warnings
@@ -29,9 +26,7 @@
 #include "helper_cuda.h"
 #include "thrust/host_vector.h"
 #include "thrust/device_vector.h"
-#if __CUDACC_VER_MAJOR__ < 12
 #include "thrust/system/cuda/experimental/pinned_allocator.h"
-#endif
 
 // C++ includes
 #include <stdio.h>
@@ -79,20 +74,11 @@ template<typename T> using   r_Ptr =       T *       __restrict__; // pointer va
 template<typename T> using  cr_Ptr = const T *       __restrict__; // pointer variable data constant
 template<typename T> using cvr_Ptr =       T * const __restrict__; // pointer constant data variable
 template<typename T> using ccr_Ptr = const T * const __restrict__; // pointer constant data constant
-
 // thrust vectors
-template <typename T> using thrustHvec    = thrust::host_vector<T>;
-template <typename T> using thrustDvec    = thrust::device_vector<T>;
-
-//*** change February 2023 ***/
-// thrust pinned host allocation broken in SDK 12.0 therefore removed. This affects only
-// a few examples and hopefully a fix will be avaible soon
-#if __CUDACC_VER_MAJOR__ < 12
 template <typename T> using thrustHvecPin =
         thrust::host_vector<T,thrust::cuda::experimental::pinned_allocator<T>>;
-#else
-template <typename T> using thrustHvecPin = thrust::host_vector<T>;  // no pinned in SDK 12.0
-#endif 
+template <typename T> using thrustHvec    = thrust::host_vector<T>;
+template <typename T> using thrustDvec    = thrust::device_vector<T>;
 
 // get pointer to thrust device array
 template <typename T> T * trDptr(thrustDvec<T> &a) { return a.data().get(); }
