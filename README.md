@@ -78,4 +78,6 @@ Wow, did I ever waste a lot of time today. I was attempting to step through the 
 
 And once again, I am stunned at how good CoPilot is at generating these comments for me. I am going to have to learn how to use it!
 
+8:29pm Hmm still getting some thrust run time issues, and I don't know why. I am going to have to look into this more tomorrow.
+
 
