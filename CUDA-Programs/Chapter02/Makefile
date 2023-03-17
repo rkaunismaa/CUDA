@@ -11,7 +11,7 @@ NAME := reduce4
 # change these to match your installation
 CUDA_PATH := /usr/local/cuda
 # assumes CUDA samles installed in ~/samples
-NVCUDASAMPLES_ROOT := /home/rob/Data/Documents/Github/NVIDIA/cuda-samples-11.8/Common
+NVCUDASAMPLES_ROOT := /home/rob/Data/Documents/Github/NVIDIA/cuda-samples/Common
 # assumes examples installed in directory ~/CudaBook 
 CX_ROOT := /home/rob/Data/Documents/Github/RichardAns/CUDA-Programs/include
 
@@ -22,10 +22,10 @@ all: build
 build: $(NAME)
 
 $(NAME).o: $(NAME).cu
-	$(CUDA_PATH)/bin/nvcc -ccbin g++ -I $(NVCUDASAMPLES_ROOT)/ -I $(CX_ROOT)/ -m64 -g -G --threads 0 --use_fast_math -gencode arch=compute_86,code=sm_86 -o $(NAME).o -c $(NAME).cu
+	$(CUDA_PATH)/bin/nvcc -ccbin g++ -I $(NVCUDASAMPLES_ROOT)/ -I $(CX_ROOT)/ -m64 -g -G --threads 0 --use_fast_math -o $(NAME).o -c $(NAME).cu
     
 $(NAME): $(NAME).o   
-	$(CUDA_PATH)/bin/nvcc -ccbin g++ -m64 -g -G -gencode arch=compute_86,code=sm_86 -o $(NAME) $(NAME).o
+	$(CUDA_PATH)/bin/nvcc -ccbin g++ -m64 -g -G -o $(NAME) $(NAME).o
 
 run: build
 	$(EXEC) ./$(NAME)

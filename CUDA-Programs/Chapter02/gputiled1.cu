@@ -48,7 +48,7 @@ template <int TS> __global__ void gputiled(r_Ptr<float> C, cr_Ptr<float> A, cr_P
 	C[ay*Bx+bx] = csum; // store complete result
 }
 
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {
 	int Arow = (argc > 1) ? atoi(argv[1]) : 1 << 10; // default 2^10
 	int Acol = (argc > 2) ? atoi(argv[2]) : Arow;
@@ -58,6 +58,11 @@ int main(int argc,char *argv[])
 	int Ccol = Bcol;
 	uint tilex = (argc > 4) ? atoi(argv[4]) : 32;
 	int nacc = (argc > 5) ? atoi(argv[5]) : 100;   // for timing
+
+	//int Abytes = Arow*Acol;
+	int Abytes = 10000000;
+	thrust::host_vector<float>       A1(Abytes);
+	thrust::device_vector<float> dev_A1(Abytes);
 
 	thrust::host_vector<float>       A(Arow*Acol);
 	thrust::host_vector<float>       B(Brow*Bcol);
