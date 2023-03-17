@@ -81,3 +81,6 @@ And once again, I am stunned at how good CoPilot is at generating these comments
 8:29pm Hmm still getting some thrust run time issues, and I don't know why. I am going to have to look into this more tomorrow.
 
 
+# Friday, March 17, 2023
+
+Today I am going to try to resolved these thrust issues I am having. I am going to start by going through the 'Programming in Parallel with CUDA' book, and see if I can get the gpusum.cu program to work.
