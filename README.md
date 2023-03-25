@@ -86,3 +86,7 @@ And once again, I am stunned at how good CoPilot is at generating these comments
 Today I am going to try to resolved these thrust::device_vector issues I am having. I am going to start by going through the 'Programming in Parallel with CUDA' book, and see if I can get the gputiled1.cu program to work.
 
 11:05am So yeah, I figured it out. In the Makefile, there was a compiler switch "-gencode arch=compute_86,code=sm_86" that was causing this problem. Remove that from the compile and link lines, and it works. Damn! I hate it when I waste time like that!
+
+# Saturday, March 25, 2023
+
+Continuing to work through various examples. I really need to be doing this on a daily basis. I am going to try to do this every day, even if it is just for a few minutes.
