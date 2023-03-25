@@ -92,3 +92,5 @@ Today I am going to try to resolved these thrust::device_vector issues I am havi
 Continuing to work through various examples. I really need to be doing this on a daily basis. I am going to try to do this every day, even if it is just for a few minutes.
 
 The trouble with 'just going through the NVIDIA samples' is the documentation is really sparse, and there is no real order in which to go through them. I am going to try to go through the CUDA Training Series, and then go through the NVIDIA samples.
+
+Also, as you work through any of these examples, always finish up with a note of where you left off, so that when you come back to it, you know where to pick up.
