@@ -94,3 +94,16 @@ Continuing to work through various examples. I really need to be doing this on a
 The trouble with 'just going through the NVIDIA samples' is the documentation is really sparse, and there is no real order in which to go through them. I am going to try to go through the CUDA Training Series, and then go through the NVIDIA samples.
 
 Also, as you work through any of these examples, always finish up with a note of where you left off, so that when you come back to it, you know where to pick up.
+
+# Thursday, April 6, 2023
+
+Nice. My CoPilot trial has been cancelled, but it still works. 
+Resuming with the NVIDIA samples. Loading in 2_Concepts_and_Techniques/particles
+
+Remember to kill all the Visual Studio project and solution files. Terminal into the sample folder and run 'make clean' and then 'make'. The Makefile that came with the project works just fine! No need to tweak this file. 
+To build the debug version, run 'make DEBUG=1'.
+
+Hmm so when I run the debug version of the program, I can see 2 versions of the program from nvidia-smi. One is running on GPU 0 and takes up 18Mib, and the second is running on GPU 1 and takes up 206Mib.
+Hmm so if I rebuild the program without the DEBUG=1 flag, I still see a version on each GPU, but on GPU 1, it now only takes up 124 MiB. 
+
+
