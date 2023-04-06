@@ -106,4 +106,6 @@ To build the debug version, run 'make DEBUG=1'.
 Hmm so when I run the debug version of the program, I can see 2 versions of the program from nvidia-smi. One is running on GPU 0 and takes up 18Mib, and the second is running on GPU 1 and takes up 206Mib.
 Hmm so if I rebuild the program without the DEBUG=1 flag, I still see a version on each GPU, but on GPU 1, it now only takes up 124 MiB. 
 
+The sample program histogram does not have any visual element. When I run it, it only runs on GPU 1.
+
 
