@@ -108,4 +108,11 @@ Hmm so if I rebuild the program without the DEBUG=1 flag, I still see a version 
 
 The sample program histogram does not have any visual element. When I run it, it only runs on GPU 1.
 
+# Monday, September 18, 2023
+
+So today I decided I want to continue with learning CUDA. I tried to run some of the programs but then noticed I no longer have CUDA installed to KAUWITB. So I guess I need to reinstall it, so let's do that ... [NVIDIA CUDA Installation Guide for Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) This will install CUDA 12.2, which is the same version as the current CUDA driver.
+
+And I cannot recall when I decided to kill CUDA from KAUWITB, but, clearly, it is no longer there. 
+
+7:55pm Damn, did that take a long time to install. Issues the first couple of times but eventually got er going! We are back in business! Nice!
 
