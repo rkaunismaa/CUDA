@@ -116,3 +116,9 @@ And I cannot recall when I decided to kill CUDA from KAUWITB, but, clearly, it i
 
 7:55pm Damn, did that take a long time to install. Issues the first couple of times but eventually got er going! We are back in business! Nice!
 
+# Tuesday, September 19, 2023
+
+9:58am I forgot to mention this from yesterday ... After installing CUDA, when I rebooted, I could no longer see anything on my 3 screens.The solution was to reboot with only 1 monitor connected. Then validate CUDA is working, and then reconnect the other 2 monitors. 
+
+10:00am Today, I want to continue with "Programming in Parallel with CUDA - A Practical Guide" by Richard Ansorge. The idea is to establish the habit (again!) of daily coding and repo updates. 
+
