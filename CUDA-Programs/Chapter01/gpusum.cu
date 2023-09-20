@@ -12,7 +12,7 @@
 // C:\Users\Richard\OneDrive\toGit2>bin\gpusum.exe 1000000000 1000
 // gpu sum = 1.9999998123, steps 1000000000 terms 1000 time 726.253 ms
 
-#include "cx.h"
+#include "../include/cx.h"
 #include "cxtimers.h"              // cx timers
 
 __host__ __device__ inline float sinsum(float x,int terms)

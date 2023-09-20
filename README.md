@@ -131,3 +131,7 @@ And I cannot recall when I decided to kill CUDA from KAUWITB, but, clearly, it i
 10:35am OK. So visually scanning the code from the current [repo](https://github.com/RichardAns/CUDA-Programs) reveals code specific to CUDA 12 ... so, I am going to grab that current code, and replace ALL the code in CUDA-Programs/include with this release ...
 
 10:55am Nice! CUDA-Programs/Chapter01/gpusum.cu now runs without problems!
+
+# Wednesday, September 20, 2023
+
+9:26am Continuing with "Programming in Parallel with CUDA"

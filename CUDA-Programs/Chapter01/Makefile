@@ -18,7 +18,6 @@ NVCUDASAMPLES_ROOT := /home/rob/Data/Documents/Github/NVIDIA/cuda-samples/Common
 CX_ROOT := /home/rob/Data/Documents/Github/RichardAns/CUDA-Programs/include
 
 
-
 # Target rules
 all: build
 
