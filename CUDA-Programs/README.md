@@ -10,3 +10,7 @@ This is the repository for my CUDA programming experiments. I am using this repo
 
 (Wow! Github CoPilot generated ALL of the above text!) 
 
+## Tuesday, September 26, 2023
+
+So today I just noticed the example file names in the repo do not contain the chapter.exampleNumber convention used in the book, so from now on, I will prepend the chapterExampleNumber to the file name to make it easier to connect the example file with the book.
+

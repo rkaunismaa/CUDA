@@ -38,7 +38,13 @@ int main(int argc,char *argv[])
 
 	cx::timer tim;
 	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
+
+	// Here we use the host callable reduce function in the thrust library to sum all
+    // the elements of the array dsums in GPU memory. This call involves two steps, ﬁrstly we
+    // perform the required additions on the GPU and secondly we copy the result from GPU
+    // memory to CPU memory. This is often referred to as a D2H (device to host) transfer.
 	double gpu_sum = thrust::reduce(dsums.begin(),dsums.end());
+	
 	double gpu_time = tim.lap_ms(); // get elapsed time
 
 	// Trapezoidal Rule Correction

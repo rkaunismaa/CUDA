@@ -39,7 +39,7 @@
 // a[4][180][359] = 1234567 and b[4][180][359] = 1111.110718
 // rank_in_block = 135 rank_in_grid = 1234567 rank of block_rank_in_grid = 2411
 
-#include "cx.h"
+#include "../include/cx.h"
 
 __device__  int   a[256][512][512];  // file scope
 __device__  float b[256][512][512];  // file scope

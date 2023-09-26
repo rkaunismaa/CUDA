@@ -13,7 +13,7 @@
 // C:\bin\gpumult2.exe 1024 1024 1024 32 8
 // A 1024 x 1024 B 1024 x 1024 gpu time 1.441 ms GFlops 1490.287 GBytes 8941.720   (faster!!)
 
-#include "cx.h"
+#include "../include/cx.h"
 #include "cxtimers.h"
 #include <random>
 

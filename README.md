@@ -139,3 +139,7 @@ And I cannot recall when I decided to kill CUDA from KAUWITB, but, clearly, it i
 # Thursday, September 21, 2023
 
 9:58am Continuing with "Programming in Parallel with CUDA"
+
+# Tuesday, September 26, 2023
+
+2:00pm Continuing with "Programming in Parallel with CUDA" ... got side tracked the last few days cuz its been soo nice outside and I had zero desire to sit inside and stare at a screen!

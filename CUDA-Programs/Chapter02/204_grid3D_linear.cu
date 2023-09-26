@@ -22,7 +22,7 @@
 // a[4][363][135] = 1234567 and b[4][363][135] = 1111.110718
 // rank_in_block = 135 rank_in_grid = 54919 pass 16 tid offset 1179648
 
-#include "cx.h"
+#include "../include/cx.h"
 
 __device__  int   a[256][512][512];  // file scope
 __device__  float b[256][512][512];  // file scope

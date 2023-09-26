@@ -7,7 +7,7 @@
 // example 2.2 tla using for   loop
 // same code with 5th argument to choose method
 
-#include "cx.h"
+#include "../include/cx.h"
 #include "cxtimers.h"                    // timers
 
 __host__ __device__ inline float sinsum(float x,int terms)
