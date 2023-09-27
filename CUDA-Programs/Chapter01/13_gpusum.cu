@@ -29,7 +29,12 @@ __host__ __device__ inline float sinsum(float x,int terms)
 
 __global__ void gpu_sin(float *sums,int steps,int terms,float step_size)
 {
+	
+	// Line 15.3 contains the magic formula used by each particular
+	// instance of an executing thread to ﬁgure out which particular value of the index step that it
+	// needs to use.
 	int step = blockIdx.x*blockDim.x+threadIdx.x; // unique thread ID
+
 	if(step<steps){
 		float x = step_size*step;
 		sums[step] = sinsum(x,terms);  // store sin values in array
