@@ -51,10 +51,21 @@ int main(int argc,char *argv[])
 	double pi = 3.14159265358979323;
 	double step_size = pi / (steps-1); // NB n-1 steps between n points
 
+	// This line creates the array dsums of size steps in the device memory using
+	// the thrust device_vector class as a container. By default the array will be
+	// initialised to zeros on the device. This array is used by the gpu_sin kernel
+	// to hold individual values returned by calls to the sinum function. 
 	thrust::device_vector<float> dsums(steps);         // GPU buffer 
+
+	// We cannot pass dsums to the kernel directly as thrust was not designed
+	// to make this possible,4 but we can pass a pointer to the memory array managed by the
+	// class.
 	float *dptr = thrust::raw_pointer_cast(&dsums[0]); // get pointer
 
 	cx::timer tim;
+	// blocks => number of blocks, threads => number of threads per block (1024 max)
+	// blocks*threads => total number of threads
+	// (threads should be a multiple of 32)
 	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
 
 	// Here we use the host callable reduce function in the thrust library to sum all
