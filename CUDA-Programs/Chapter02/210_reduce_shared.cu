@@ -4,7 +4,7 @@
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
-#include "cx.h"
+#include "../include/cx.h"
 
 __global__ void shared_example(float *x,float *y,int m)
 {

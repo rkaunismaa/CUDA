@@ -12,7 +12,7 @@
 // C:\bin\gputiled.exe 1024 1024 1024 32
 // A 1024 x 1024 B 1024 x 1024 gpu time 1.125 ms GFlops 1908.968 GBytes 11453.806 (gputiled)
 
-#include "cx.h"
+#include "../include/cx.h"
 #include "cxtimers.h"
 #include <random>
 

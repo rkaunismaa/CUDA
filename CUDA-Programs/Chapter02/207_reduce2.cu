@@ -12,7 +12,7 @@
 // C:\bin\reduce2.exe 24 256 256
 // sum of 16777216 numbers: host 8388314.9 15.662 ms GPU 8388314.5 0.113 ms
 
-#include "cx.h"
+#include "../include/cx.h"
 #include "cxtimers.h"
 #include <random>
 
