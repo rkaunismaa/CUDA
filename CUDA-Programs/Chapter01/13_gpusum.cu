@@ -65,7 +65,7 @@ int main(int argc,char *argv[])
 	cx::timer tim;
 	// blocks => number of blocks, threads => number of threads per block (1024 max)
 	// blocks*threads => total number of threads
-	// (threads should be a multiple of 32)
+	// (threads should be a multiple of warp size 32)
 	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
 
 	// Here we use the host callable reduce function in the thrust library to sum all
