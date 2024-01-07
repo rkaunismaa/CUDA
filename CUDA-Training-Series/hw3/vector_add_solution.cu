@@ -3,6 +3,9 @@
 #include <iostream>
 #include <chrono>
 
+#include <cuda.h>
+#include <cuda_runtime.h>
+
 // error checking macro
 #define cudaCheckErrors(msg) \
     do { \

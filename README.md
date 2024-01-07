@@ -143,3 +143,31 @@ And I cannot recall when I decided to kill CUDA from KAUWITB, but, clearly, it i
 # Tuesday, September 26, 2023
 
 2:00pm Continuing with "Programming in Parallel with CUDA" ... got side tracked the last few days cuz its been soo nice outside and I had zero desire to sit inside and stare at a screen!
+
+
+# Friday, January 5, 2024
+
+Gonna crawl my way back into this learning path. Right away I noticed a lot of red squigglies when looking at /CUDA-Training-Series/hw3/vector_add_solution.cu ... suggesting this code does not know it's a cuda program ... ? 
+
+Hmm I can hit F5, it runs, and the debugger runs ... so why all the red stuff?
+
+The cuda stuff runs on the 4090, not the main display 1050 card ... why??
+
+Right! I wanted to see if the CUDA Sample programs still ran on this computer, then remembered that code is now found locally at Data/Documents/Github/NVIDIA/cuda-samples 
+
+OK. I was still able to run .... 
+
+* /Data/Documents/Github/NVIDIA/cuda-samples/Samples/1_Utilities/deviceQuery
+* /Data/Documents/Github/NVIDIA/cuda-samples/Samples/5_Domain_Specific/Mandelbrot
+* /Data/Documents/Github/NVIDIA/cuda-samples/Samples/5_Domain_Specific/smokeParticles
+
+Terminal into these folders, then run ./deviceQuery, to run the program ...
+
+# Saturday, January 6, 2024
+
+Those red squiggles were showing up because intellisense did not know where to find the cuda header files. I had to add the following to the top of the file ... 
+
+* #include <cuda.h>
+* #include <cuda_runtime.h>
+
+That makes a lot of the red squiggles disappear, but not all of them ... meh.

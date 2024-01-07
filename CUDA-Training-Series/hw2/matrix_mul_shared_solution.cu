@@ -3,6 +3,9 @@
 // these are just for timing measurments
 #include <time.h>
 
+#include <cuda.h>
+#include <cuda_runtime.h>
+
 // error checking macro
 #define cudaCheckErrors(msg) \
     do { \
