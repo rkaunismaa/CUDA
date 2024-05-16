@@ -171,3 +171,12 @@ Those red squiggles were showing up because intellisense did not know where to f
 * #include <cuda_runtime.h>
 
 That makes a lot of the red squiggles disappear, but not all of them ... meh.
+
+# Thursday, May 16, 2024
+
+Yup, giving this another go. 
+
+Gonna give the book [Programming Massively Parallel Processors](https://www.amazon.ca/Programming-Massively-Parallel-Processors-Hands/dp/0323912311/?_encoding=UTF8&ref_=pd_hp_d_atf_ci_mcx_mr_hp_atf_m) a go ... 
+
+* [Accelerated Computing Teaching Kit Lab/solution Repository](https://github.com/pixom-ai/NVIDIA-AcceleratedComputing)
+* [Programming Massively Parallel Processors](https://www.youtube.com/@pmpp-book)
