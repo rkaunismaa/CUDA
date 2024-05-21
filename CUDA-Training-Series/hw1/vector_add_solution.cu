@@ -14,18 +14,19 @@
     } while (0)
 
 
-// const int DSIZE = 4096;
+const int DSIZE = 4096;
 //const int DSIZE = 8192;
 //const int DSIZE = 16384;
 //const int DSIZE = 65536;
 //const int DSIZE = 4194304;    // 2 ** 22
 //const int DSIZE = 8388608;    // 2 ** 23
-const int DSIZE = 4294967296;  // 2 ** 32
+// const int DSIZE = 4294967296;  // 2 ** 32
 const int block_size = 256;  // CUDA maximum is 1024
 // vector add kernel: C = A + B
 __global__ void vadd(const float *A, const float *B, float *C, int ds){
 
-  int idx = threadIdx.x+blockDim.x*blockIdx.x;
+  int idx = threadIdx.x + (blockDim.x*blockIdx.x);
+
   if (idx < ds)
     C[idx] = A[idx] + B[idx];
 }
@@ -57,6 +58,7 @@ int main(){
 
   //cuda processing sequence step 2 is complete
   cudaMemcpy(h_C, d_C, DSIZE*sizeof(float), cudaMemcpyDeviceToHost);
+
   //cuda processing sequence step 3 is complete
   cudaCheckErrors("kernel execution failure or cudaMemcpy H2D failure");
 
