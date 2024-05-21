@@ -180,3 +180,7 @@ Gonna give the book [Programming Massively Parallel Processors](https://www.amaz
 
 * [Accelerated Computing Teaching Kit Lab/solution Repository](https://github.com/pixom-ai/NVIDIA-AcceleratedComputing)
 * [Programming Massively Parallel Processors](https://www.youtube.com/@pmpp-book)
+
+# Tuesday, May 21, 2024
+
+* [Programming Massively Parallel Processors](https://www.youtube.com/watch?v=kwtn2NtFIuA&list=PLRRuQYjFhpmvu5ODQoY2l7D0ADgWEcYAX)
