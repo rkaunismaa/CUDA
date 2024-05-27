@@ -184,3 +184,63 @@ Gonna give the book [Programming Massively Parallel Processors](https://www.amaz
 # Tuesday, May 21, 2024
 
 * [Programming Massively Parallel Processors](https://www.youtube.com/watch?v=kwtn2NtFIuA&list=PLRRuQYjFhpmvu5ODQoY2l7D0ADgWEcYAX)
+
+# Monday, May 27, 2024
+
+Getting back to 'Programming in Parallel with CUDA' ... cuz reading a book keeps you focused and reduces the distractions, right ...
+
+I kinda recall why I bailed on this book. I am using VSCode as my IDE and these code samples use a make file, which I have to tweak to get it right. I recall trying to 'learn how to make a make file' and got frustrated with the experience. Whelp, gonna try to learn enough to get past this problem.
+
+Running 'make build NAME=11_cpusum' from within the CUDA-Programs/Chapter01 folder compiles without errors, but running 'make build NAME=13_gpusum' from within the same folder results in the following errors ... 
+
+      (base) rob@KAUWITB:~/Data/Documents/Github/rkaunismaa/CUDA/CUDA-Programs/Chapter01$ make build NAME=13_gpusum
+      /usr/local/cuda/bin/nvcc -ccbin g++ -I /home/rob/Data/Documents/Github/NVIDIA/cuda-samples/Common/ -I /home/rob/Data/Documents/Github/RichardAns/CUDA-Programs/include/ -g -G -m64  --threads 0 --use_fast_math  -o 13_gpusum.o -c 13_gpusum.cu
+      13_gpusum.cu(1): warning #968-D: this universal character is not allowed in an identifier
+      \U0000feff
+      ^
+
+      Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+      13_gpusum.cu(1): error: this declaration has no storage class or type specifier
+      \U0000feff
+      ^
+
+      /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h(24): error: expected a ";"
+      typedef __uint8_t uint8_t;
+      ^
+
+      /usr/include/c++/11/cstdint(65): error: the global scope has no "uint8_t"
+         using ::uint8_t;
+                  ^
+
+      /usr/local/cuda/bin/../targets/x86_64-linux/include/cuda/std/detail/libcxx/include/__type_traits/../cstdint(171): error: the global scope has no "uint8_t"
+      using::uint8_t;
+               ^
+
+      /usr/include/c++/11/atomic(1111): error: identifier "uint8_t" is undefined
+         typedef atomic<uint8_t> atomic_uint8_t;
+                        ^
+
+      /usr/local/cuda/bin/../targets/x86_64-linux/include/thrust/detail/cstdint.h(58): error: the global scope has no "uint8_t"
+      typedef ::uint8_t uint8_t;
+                  ^
+
+      6 errors detected in the compilation of "13_gpusum.cu".
+      make: *** [Makefile:42: 13_gpusum.o] Error 255
+
+Looking at the original [RichardAns/CUDA-Programs](https://github.com/RichardAns/CUDA-Programs) reveals every program code file is in its own subfolder, whereas I am less granular copying the desired code samples in the 'CUDA-Programs/Chapter01', 'CUDA-Programs/Chapter01', etc folders. My cursory look at these make files suggests they are all the same.  
+
+OK. I copied the original code samples into the 'CUDA-Programs/Chapter01/gpusum' folder and replicated the folder structure here. I also created a 'Linux' folder below 'CUDA-Programs' and made 3 path changes to the 'CUDA-Programs/Chapter01/gpusum/Makefile' file, then ran'make build NAME=gpusum' from within the 'CUDA-Programs/Chapter01/gpusum' folder ...It compiled just fine. 
+
+Dammit, right! I remember the book refers to the 'CUDA-Programs/Chapter01/gpusum.cu' file as '13_gpusum.cu' ... I think this is why I was running into these stupid build errors. What an idiot! ... sigh. 
+
+OK! 'CUDA-Programs/Chapter01/gpusum.cu' compiles with debugging just fine by running 'make debug NAME=gpusum' from within the 'CUDA-Programs/Chapter01/gpusum' folder. And then modify the 'launch.json' file to ...
+
+   "program": "${workspaceFolder}/CUDA-Programs/Chapter01/gpusum/gpusum"
+
+... and then you will be able to run the program through the debugger. 
+
+So yeah, this is the workflow to get stuff going!
+
+
+
