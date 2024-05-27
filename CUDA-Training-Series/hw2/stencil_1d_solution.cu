@@ -17,8 +17,10 @@ __global__ void stencil_1d(int *in, int *out) {
     // Read input elements into shared memory
     temp[lindex] = in[gindex];
     if (threadIdx.x < RADIUS) {
+
       temp[lindex - RADIUS] = in[gindex - RADIUS]; // left side of the halo
       temp[lindex + BLOCK_SIZE] = in[gindex + BLOCK_SIZE]; // right side of the halo
+      
     }
 
     // Synchronize (ensure all the data is available)
