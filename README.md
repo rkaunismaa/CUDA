@@ -242,5 +242,9 @@ OK! 'CUDA-Programs/Chapter01/gpusum.cu' compiles with debugging just fine by run
 
 So yeah, this is the workflow to get stuff going!
 
+So now you would think I should be able to replicate 'CUDA-Programs/Chapter01/gpusum/gpusum.cu' to 'CUDA-Programs/Chapter01/gpusum.cu' and also 'CUDA-Programs/Chapter01/gpusum/Makefile' to 'CUDA-Programs/Chapter01/Makefile', then run 'make build NAME=gpusum' from within the 'CUDA-Programs/Chapter01' folder ... but nope. 
+
+OK ... I renamed the original 'CUDA-Programs/Chapter01/13_gpusum.cu' to ''CUDA-Programs/Chapter01/_13_gpusum.cu', then renamed ''CUDA-Programs/Chapter01/gpusum.cu'' to 'CUDA-Programs/Chapter01/13_gpusum.cu', and tweaked the 'CUDA-Programs/Chapter01/Makefile' file from '../../Linux/' to '../Linux', and now stuff works! Great! ... Sigh ... yup, this is the workflow ... you gotta figure stuff out on your own!
+
 
 
