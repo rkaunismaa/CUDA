@@ -246,5 +246,9 @@ So now you would think I should be able to replicate 'CUDA-Programs/Chapter01/gp
 
 OK ... I renamed the original 'CUDA-Programs/Chapter01/13_gpusum.cu' to ''CUDA-Programs/Chapter01/_13_gpusum.cu', then renamed ''CUDA-Programs/Chapter01/gpusum.cu'' to 'CUDA-Programs/Chapter01/13_gpusum.cu', and tweaked the 'CUDA-Programs/Chapter01/Makefile' file from '../../Linux/' to '../Linux', and now stuff works! Great! ... Sigh ... yup, this is the workflow ... you gotta figure stuff out on your own!
 
+# Tuesday, May 28, 2024
+
+Damn the book 'Programming in Parallel with CUDA' is really good. Goes into a lot of detail. Interesting to realize [NVIDIA/Thrust](https://github.com/NVIDIA/thrust) is no longer being worked on as separate library but has been 'The Thrust repository has been archived and is now part of the unified nvidia/cccl repository' ...
+
 
 
