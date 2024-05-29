@@ -44,9 +44,10 @@ __global__ void gpu_sin_tla_forloop(float *sums,int steps,int terms,float step_s
 int main(int argc,char *argv[])
 {
 	if (argc < 2) {
-		printf("usage gpusum_tla steps|1000000 trems|1000 threads|256 blcoks|256 loopkind|1\n");
+		printf("usage gpusum_tla steps|1000000 terms|1000 threads|256 blocks|256 loopkind|1\n");
 		return 0;
 	}
+	
 	int steps   = (argc > 1) ? atoi(argv[1])  : 1000000;
 	int terms   = (argc > 2) ? atoi(argv[2])  : 1000;
 	int threads = (argc > 3) ? atoi(argv[3])  : 256;

@@ -250,5 +250,12 @@ OK ... I renamed the original 'CUDA-Programs/Chapter01/13_gpusum.cu' to ''CUDA-P
 
 Damn the book 'Programming in Parallel with CUDA' is really good. Goes into a lot of detail. Interesting to realize [NVIDIA/Thrust](https://github.com/NVIDIA/thrust) is no longer being worked on as separate library but has been 'The Thrust repository has been archived and is now part of the unified nvidia/cccl repository' ...
 
+# Wednesday, May 29, 2024
+
+Continuing with "Programming in Parallel with CUDA" 
+
+Why are my command line arguments defined in launch.json not being passed into the program??
+
+OK! Got it to work! 
 
 
