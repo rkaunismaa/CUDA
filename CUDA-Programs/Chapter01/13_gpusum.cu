@@ -55,7 +55,7 @@ int main(int argc,char *argv[])
 
 	cx::timer tim;
 
-	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
+	gpu_sin<<<blocks,threads>>>(dptr, steps, terms, (float)step_size);
 
 	double gpu_sum = thrust::reduce(dsums.begin(),dsums.end());
 	double gpu_time = tim.lap_ms(); // get elapsed time

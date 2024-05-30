@@ -10,7 +10,7 @@
 #include "../include/cx.h"
 #include "cxtimers.h"                    // timers
 
-__host__ __device__ inline float sinsum(float x,int terms)
+__host__ __device__ inline float sinsum(float x, int terms)
 {
 	float x2 = x*x;
 	float term = x;   // first term of series
@@ -23,7 +23,7 @@ __host__ __device__ inline float sinsum(float x,int terms)
 }
 
 // kernel uses many parallel threads for sinsum calls
-__global__ void gpu_sin_tla_whileloop(float *sums,int steps,int terms,float step_size)
+__global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float step_size)
 {
 	int step = blockIdx.x*blockDim.x+threadIdx.x; // start with unique thread ID
 	while(step<steps){
@@ -33,7 +33,7 @@ __global__ void gpu_sin_tla_whileloop(float *sums,int steps,int terms,float step
 	}
 }
 
-__global__ void gpu_sin_tla_forloop(float *sums,int steps,int terms,float step_size)
+__global__ void gpu_sin_tla_forloop(float *sums, int steps, int terms, float step_size)
 {
 	for(int step = blockIdx.x*blockDim.x+threadIdx.x; step<steps; step += gridDim.x*blockDim.x){
 		float x = step_size*step;
