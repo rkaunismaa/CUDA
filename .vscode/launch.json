@@ -6,8 +6,13 @@
       "type": "cuda-gdb",
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
-      "args": "1234567, 288, 256"
+
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
+      "args": "1234567"
+
+      //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
+      //"args": "1234567, 288, 256"
+
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/201_gpusum_tla",
       //"args": "1000000000, 1000, 256"
       //"args": "1000000000, 1000, 256, 3906251, 1"
