@@ -1,4 +1,4 @@
-.vscode/
+# .vscode/
 
 # CUDA-Training-Series
 
@@ -12,7 +12,6 @@ CUDA-Training-Series/hw2/stencil_1d_solution
 CUDA-Training-Series/hw3/vector_add_solution
 
 CUDA-Training-Series/hw4/matrix_sums_solution
-
 
 # NVIDIA/cuda-samples
 
@@ -30,8 +29,6 @@ NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAddDrv
 NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAddDrv.o
 NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/data/vectorAdd_kernel64.fatbin
 NVIDIA/cuda-samples/Samples/0_Introduction/vectorAddDrv/vectorAdd_kernel64.fatbin
-
-
 
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/bandwidthTest
 NVIDIA/cuda-samples/Samples/1_Utilities/bandwidthTest/*.o

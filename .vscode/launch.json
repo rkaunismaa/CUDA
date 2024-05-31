@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CUDA C++: Launch",
+      "type": "cuda-gdb",
+      "request": "launch",
+      "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
+      "args": "1234567, 288, 256"
+      //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/201_gpusum_tla",
+      //"args": "1000000000, 1000, 256"
+      //"args": "1000000000, 1000, 256, 3906251, 1"
+      //"args": ["1000000000","1000","256","1024","1"] ... this does not work! ... 
+    },
+
+    {
+      "name": "CUDA C++: Attach",
+      "type": "cuda-gdb",
+      "request": "attach"
+    }
+  ]
+}
