@@ -73,8 +73,8 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
 
 	int array_size = nx*ny*nz;
-	int block_size = blockDim.x*blockDim.y*blockDim.z;
-	int grid_size  = gridDim.x* gridDim.y* gridDim.z;
+	int block_size = blockDim.x * blockDim.y * blockDim.z;
+	int grid_size  = gridDim.x * gridDim.y * gridDim.z;
 
 	int total_threads = block_size*grid_size;
 
