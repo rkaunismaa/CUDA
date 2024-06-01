@@ -98,12 +98,18 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 	if(thread_rank_in_grid == id) {
 		printf("*** START ***\n");
+
 		printf("array size   %3d x %3d x %3d = %d\n", nx, ny, nz, array_size);
-		printf("thread block %3d x %3d x %3d = %d\n", blockDimx, blockDimy, blockDimz, block_size);
+
 		printf("thread  grid %3d x %3d x %3d = %d\n", gridDimx, gridDimy, gridDimz, grid_size);
+		printf("thread block %3d x %3d x %3d = %d\n", blockDimx, blockDimy, blockDimz, block_size);
+		
 		printf("total number of threads in grid %d\n", total_threads);
+
 		printf("a[%d][%d][%d] = %i and b[%d][%d][%d] = %f\n", z, y, x, a[z][y][x], z, y, x, b[z][y][x]);
+
 		printf("rank_in_block = %d rank_in_grid = %d rank of block_rank_in_grid = %d\n", thread_rank_in_block, thread_rank_in_grid, block_rank_in_grid);
+		
 		printf("*** END ***\n");
 	}
 }
