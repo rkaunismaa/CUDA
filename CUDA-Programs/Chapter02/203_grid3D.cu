@@ -56,13 +56,23 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	// int y = blockIdx.y*blockDim.y + threadIdx.y; // in arrays
 	// int z = blockIdx.z*blockDim.z + threadIdx.z; // 
 
+	int gridDimx = gridDim.x; // 16
+	int gridDimy = gridDim.y; // 64
+	int gridDimz = gridDim.z; // 128
+
+	if (gridDimx != 16 || gridDimy != 64 || gridDimz != 128)
+	{
+		printf("gridDim KABOOM!");
+		return ;
+	}
+
 	int blockDimx = blockDim.x; // 32
 	int blockDimy = blockDim.y; // 8
 	int blockDimz = blockDim.z; // 2
 
 	if(blockDimx != 32 || blockDimy != 8 || blockDimz != 2)
 	{
-		printf("KABOOM!");
+		printf("blockDim KABOOM!");
 		return;     // out of range?
 	};
 
@@ -73,13 +83,13 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
 
 	int array_size = nx*ny*nz;
-	int block_size = blockDim.x * blockDim.y * blockDim.z;
-	int grid_size  = gridDim.x * gridDim.y * gridDim.z;
+	int block_size = blockDimx * blockDimy * blockDimz;
+	int grid_size  = gridDimx * gridDimy * gridDimz;
 
 	int total_threads = block_size*grid_size;
 
-	int thread_rank_in_block = (threadIdx.z*blockDim.y + threadIdx.y)*blockDim.x + threadIdx.x;
-	int block_rank_in_grid  =  (blockIdx.z*gridDim.y + blockIdx.y)*gridDim.x + blockIdx.x;
+	int thread_rank_in_block = (threadIdx.z*blockDimy + threadIdx.y)*blockDimx + threadIdx.x;
+	int block_rank_in_grid  =  (blockIdx.z*gridDimy + blockIdx.y)*gridDimx + blockIdx.x;
 	int thread_rank_in_grid = thread_rank_in_block + block_size*block_rank_in_grid;
 
 	// do some work here
@@ -89,8 +99,8 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	if(thread_rank_in_grid == id) {
 		printf("*** START ***\n");
 		printf("array size   %3d x %3d x %3d = %d\n", nx, ny, nz, array_size);
-		printf("thread block %3d x %3d x %3d = %d\n", blockDim.x, blockDim.y, blockDim.z, block_size);
-		printf("thread  grid %3d x %3d x %3d = %d\n", gridDim.x, gridDim.y, gridDim.z, grid_size);
+		printf("thread block %3d x %3d x %3d = %d\n", blockDimx, blockDimy, blockDimz, block_size);
+		printf("thread  grid %3d x %3d x %3d = %d\n", gridDimx, gridDimy, gridDimz, grid_size);
 		printf("total number of threads in grid %d\n", total_threads);
 		printf("a[%d][%d][%d] = %i and b[%d][%d][%d] = %f\n", z, y, x, a[z][y][x], z, y, x, b[z][y][x]);
 		printf("rank_in_block = %d rank_in_grid = %d rank of block_rank_in_grid = %d\n", thread_rank_in_block, thread_rank_in_grid, block_rank_in_grid);
