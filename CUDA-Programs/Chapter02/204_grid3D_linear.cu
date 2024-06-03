@@ -23,16 +23,28 @@
 // rank_in_block = 135 rank_in_grid = 54919 pass 16 tid offset 1179648
 
 #include "../include/cx.h"
+#include <locale.h>
 
-__device__  int   a[256][512][512];  // file scope
-__device__  float b[256][512][512];  // file scope
+// __device__  int   a[256][512][512];  // file scope
+// __device__  float b[256][512][512];  // file scope
+
+// Notice the array dimensions are in order z, y, x going from left to
+// right, where memory is allocated so the adjacent x values are adjacent in memory
+__device__  int   a[256][512][1024];  // file scope
+__device__  float b[256][512][1024];  // file scope
 
 __global__ void grid3D_linear(int nx, int ny, int nz, int id)
 {
-	int tid = blockIdx.x*blockDim.x + threadIdx.x;
+
+	// setlocale(LC_NUMERIC, "");
+
+	int gridDimx = gridDim.x ;
+	int blockDimx = blockDim.x ;
+
+	int tid = blockIdx.x * blockDimx + threadIdx.x;
 
 	int array_size = nx*ny*nz;
-	int total_threads = gridDim.x*blockDim.x;
+	int total_threads = gridDimx * blockDimx;
 
 	int tid_start = tid;
 	int pass = 0;
@@ -48,12 +60,21 @@ __global__ void grid3D_linear(int nx, int ny, int nz, int id)
 		b[z][y][x] = sqrtf((float)a[z][y][x]);
 
 		if(tid == id) {
-			printf("array size   %3d x %3d x %3d = %d\n",nx,ny,nz,array_size);
-			printf("thread block %3d\n",blockDim.x);
-			printf("thread  grid %3d\n",gridDim.x);
-			printf("total number of threads in grid %d\n",total_threads);
+
+			printf("--- START ---\n");
+
+			printf("array size   %3d x %3d x %3d = %d\n", nx, ny, nz, array_size);
+
+			printf("grid3D_linear<<<%3d,%3d>>>(%3d,%3d,%3d,%3d);\n", gridDimx, blockDimx, nx, ny, nz, id);
+			printf("thread  grid %3d\n", gridDimx);
+			printf("thread block %3d\n", blockDimx);
+
+			printf("total number of threads in grid %3d x %3d = %d\n", gridDimx, blockDimx, total_threads);
+
 			printf("a[%d][%d][%d] = %i and b[%d][%d][%d] = %f\n",z,y,x,a[z][y][x],z,y,x,b[z][y][x]);
-			printf("rank_in_block = %d rank_in_grid = %d pass %d tid offset %d\n",threadIdx.x,tid_start,pass,tid-tid_start);
+			printf("rank_in_block =  %d rank_in_grid = %d pass %d tid offset %d\n",threadIdx.x,tid_start,pass,tid-tid_start);
+
+			printf("--- END ---\n");
 		}
 
 		tid += gridDim.x*blockDim.x;
@@ -68,7 +89,8 @@ int main(int argc,char *argv[])
 	int blocks  = (argc > 2) ? atoi(argv[2]) : 288;
 	int threads = (argc > 3) ? atoi(argv[3]) : 256;
 
-	grid3D_linear<<<blocks,threads>>>(512,512,256,id);
+	// grid3D_linear<<<blocks,threads>>>(512,512,256,id);
+	grid3D_linear<<<blocks,threads>>>(1024,512,256,id);
 
     cudaDeviceSynchronize(); // necessary in Linux to see kernel printf
 
