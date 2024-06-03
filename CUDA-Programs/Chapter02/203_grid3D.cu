@@ -41,21 +41,30 @@
 
 #include "../include/cx.h"
 
-__device__  int   a[256][512][512];  // file scope
-__device__  float b[256][512][512];  // file scope
+// __device__  int   a[256][512][512];  // file scope
+// __device__  float b[256][512][512];  // file scope
 
-//                         512     512     256     1234567
+
+// Notice the array dimensions are in order z, y, x going from left to
+// right, where memory is allocated so the adjacent x values are adjacent in memory. This is standard in
+// C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
+// “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
+// variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
+__device__  int   a[256][512][1024];  // file scope
+__device__  float b[256][512][1024];  // file scope
+
+
+//                         1024    512     256     1234567
 __global__ void grid3D(int nx, int ny, int nz, int id)
 {
 
-	// dim3 block3d(16, 64, 128); // 16*64*128 = 131072
-	// dim3 thread3d(32, 8, 2); // 32*8*2    = 512
-	// grid3D<<<block3d, thread3d>>>(512, 512, 256, id);
+	// grid3D<<<block3d, thread3d>>>(1024, 512, 256, id);
 
 	// int x = blockIdx.x*blockDim.x + threadIdx.x; // find (x,y,z) in
 	// int y = blockIdx.y*blockDim.y + threadIdx.y; // in arrays
 	// int z = blockIdx.z*blockDim.z + threadIdx.z; // 
 
+	// dim3 block3d(16, 64, 128); // 16*64*128 = 131072
 	int gridDimx = gridDim.x; // 16
 	int gridDimy = gridDim.y; // 64
 	int gridDimz = gridDim.z; // 128
@@ -66,6 +75,7 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 		return ;
 	}
 
+	// dim3 thread3d(32, 8, 2); // 32*8*2    = 512
 	int blockDimx = blockDim.x; // 32
 	int blockDimy = blockDim.y; // 8
 	int blockDimz = blockDim.z; // 2
@@ -82,22 +92,24 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
 
-	int array_size = nx*ny*nz;
+	int array_size = nx * ny * nz;
 	int block_size = blockDimx * blockDimy * blockDimz;
 	int grid_size  = gridDimx * gridDimy * gridDimz;
 
-	int total_threads = block_size*grid_size;
+	int total_threads = block_size * grid_size;
 
-	int thread_rank_in_block = (threadIdx.z*blockDimy + threadIdx.y)*blockDimx + threadIdx.x;
-	int block_rank_in_grid  =  (blockIdx.z*gridDimy + blockIdx.y)*gridDimx + blockIdx.x;
-	int thread_rank_in_grid = thread_rank_in_block + block_size*block_rank_in_grid;
+	int thread_rank_in_block = (((threadIdx.z * blockDimy) + threadIdx.y) * blockDimx) + threadIdx.x;
+	int block_rank_in_grid  =  (((blockIdx.z * gridDimy) + blockIdx.y) * gridDimx) + blockIdx.x;
+	int thread_rank_in_grid = thread_rank_in_block + (block_size * block_rank_in_grid);
 
 	// do some work here
+	// ... notice the order of the dimensions! ... it's NOT x,y,z .. !
 	a[z][y][x] = thread_rank_in_grid;
 	b[z][y][x] = sqrtf((float)a[z][y][x]);
 
 	if(thread_rank_in_grid == id) {
-		printf("*** START ***\n");
+
+		printf("--- START ---\n");
 
 		printf("array size   %3d x %3d x %3d = %d\n", nx, ny, nz, array_size);
 
@@ -110,7 +122,7 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 		printf("rank_in_block = %d rank_in_grid = %d rank of block_rank_in_grid = %d\n", thread_rank_in_block, thread_rank_in_grid, block_rank_in_grid);
 		
-		printf("*** END ***\n");
+		printf("--- END ---\n");
 	}
 }
 
@@ -121,7 +133,8 @@ int main(int argc,char *argv[])
 	dim3 block3d(16, 64, 128); // 16*64*128 = 131072
 	dim3 thread3d(32, 8, 2); // 32*8*2    = 512
 
-	grid3D<<<block3d, thread3d>>>(512, 512, 256, id);
+	// grid3D<<<block3d, thread3d>>>(512, 512, 256, id);
+	grid3D<<<block3d, thread3d>>>(1024, 512, 256, id);
 
     cudaDeviceSynchronize(); // necessary in Linux to see kernel printf
 
