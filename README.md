@@ -266,6 +266,10 @@ The rank of the thread within its 3D thread block is calculated using the standa
 
 <img src="images/3D_Rank_Forumula.png" alt="3D Rank Formula" width="300">
 
+Another resource I plan on going through is [Programming Massively Parallel Processors (4th Edition)](https://www.amazon.ca/Programming-Massively-Parallel-Processors-Hands/dp/0323912311/?_encoding=UTF8&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d)
+
+<img src="images/ProgrammingMassivelyParallelProcessors.jpg" alt="3D Rank Formula" width="300">
+
 
 
 

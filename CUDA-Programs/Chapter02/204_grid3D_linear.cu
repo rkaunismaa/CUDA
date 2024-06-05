@@ -41,10 +41,10 @@ __global__ void grid3D_linear(int nx, int ny, int nz, int id)
 	int gridDimx = gridDim.x ;
 	int blockDimx = blockDim.x ;
 
-	int tid = blockIdx.x * blockDimx + threadIdx.x;
+	int tid = (blockIdx.x * blockDimx) + threadIdx.x;
 
-	int array_size = nx*ny*nz;
-	int total_threads = gridDimx * blockDimx;
+	int array_size = nx * ny * nz;
+	int total_threads = (gridDimx * blockDimx;)
 
 	int tid_start = tid;
 	int pass = 0;

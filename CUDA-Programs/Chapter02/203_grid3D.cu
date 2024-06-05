@@ -98,8 +98,10 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 	int total_threads = block_size * grid_size;
 
+	// 
 	int thread_rank_in_block = (((threadIdx.z * blockDimy) + threadIdx.y) * blockDimx) + threadIdx.x;
 	int block_rank_in_grid  =  (((blockIdx.z * gridDimy) + blockIdx.y) * gridDimx) + blockIdx.x;
+
 	int thread_rank_in_grid = thread_rank_in_block + (block_size * block_rank_in_grid);
 
 	// do some work here
