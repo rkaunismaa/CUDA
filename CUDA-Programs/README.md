@@ -1,5 +1,7 @@
 # CUDA Programs
 
+<img src="../images/ProgrammingInParallelWithCUDA.jpg" alt="Programing In Parallel with CUDA" width="300">
+
 https://github.com/RichardAns/CUDA-Programs
 
 The above repository is from the book 'Programming in Parallel with CUDA A Practical Guide' by Richard Ansorge

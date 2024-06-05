@@ -258,4 +258,14 @@ Why are my command line arguments defined in launch.json not being passed into t
 
 OK! Got it to work! 
 
+# Wednesday, June 5, 2024
+
+Continuing with "Programming in Parallel with CUDA" 
+
+The rank of the thread within its 3D thread block is calculated using the standard 3D addressing rank formula:
+
+<img src="images/3D_Rank_Forumula.png" alt="3D Rank Formula" width="300">
+
+
+
 
