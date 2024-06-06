@@ -10,8 +10,12 @@
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
       // "args": "12345, 288, 256"
 
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
+
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/205_reduce0",
       "args": "1234567"
+
+      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
+      // "args": "1234567"
 
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
       //"args": "1234567, 288, 256"
