@@ -16,12 +16,16 @@
 #include "cxtimers.h"
 #include <random>
 
-__global__ void reduce1(float *x,int N)
+__global__ void reduce1(float *x, int N)
 {
-	int tid = blockDim.x*blockIdx.x+threadIdx.x;
+	int tid = (blockDim.x * blockIdx.x) + threadIdx.x;
+
 	float tsum = 0.0f;
-	int stride = gridDim.x*blockDim.x;
+
+	int stride = (gridDim.x * blockDim.x);
+
 	for(int k=tid; k<N; k += stride) tsum += x[k];
+
 	x[tid] = tsum;
 }
 
@@ -31,6 +35,7 @@ int main(int argc,char *argv[])
 	int blocks  = (argc > 2) ? atoi(argv[2]) : 288;
 	int threads = (argc > 3) ? atoi(argv[3]) : 256;
 	int nreps   = (argc > 4) ? atoi(argv[4]) : 1000;    // set this to 1 for correct answer
+
 	thrust::host_vector<float>    x(N);
 	thrust::device_vector<float> dev_x(N);
 
@@ -43,6 +48,7 @@ int main(int argc,char *argv[])
 	dev_x = x;  // H2D copy (N words)
 
 	cx::timer tim;
+
 	double host_sum = 0.0;
 	//float host_sum = 0.0;
 	for(int k = 0; k<N; k++) host_sum += x[k]; // host reduce!
@@ -50,11 +56,12 @@ int main(int argc,char *argv[])
 
 	// simple GPU reduce for N = power of 2  
 	tim.reset();
+
 	double gpu_sum = 0.0;
-	for(int rep=0;rep<nreps;rep++){
-		reduce1<<< blocks,threads >>>(dev_x.data().get(),N);
-		reduce1<<< 1,threads >>>(dev_x.data().get(),blocks*threads);
-		reduce1<<< 1,1 >>>(dev_x.data().get(),threads);
+	for(int rep=0 ; rep<nreps ; rep++){
+		reduce1<<< blocks , threads >>>(dev_x.data().get(), N);
+		reduce1<<< 1,       threads >>>(dev_x.data().get(), blocks*threads);
+		reduce1<<< 1,       1 >>>(      dev_x.data().get(), threads);
 		if (rep==0) gpu_sum = dev_x[0];
 	}
 	cudaDeviceSynchronize();

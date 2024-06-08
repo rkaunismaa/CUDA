@@ -80,7 +80,7 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	int blockDimy = blockDim.y; // 8
 	int blockDimz = blockDim.z; // 2
 
-	if(blockDimx != 32 || blockDimy != 8 || blockDimz != 2)
+	if(blockDimx != 32 || blockDimy != 8 || blockDimz != 2 || (blockDimx * blockDimy * blockDimz) > 1024)
 	{
 		printf("blockDim KABOOM!");
 		return;     // out of range?
@@ -142,3 +142,12 @@ int main(int argc,char *argv[])
 
 	return 0;
 }
+
+// --- START ---
+// array size   1024 x 512 x 256 = 134217728
+// thread  grid  16 x  64 x 128 = 131072
+// thread block  32 x   8 x   2 = 512
+// total number of threads in grid 67108864
+// a[4][180][359] = 1234567 and b[4][180][359] = 1111.110718
+// rank_in_block = 135 rank_in_grid = 1234567 rank of block_rank_in_grid = 2411
+// --- END ---
