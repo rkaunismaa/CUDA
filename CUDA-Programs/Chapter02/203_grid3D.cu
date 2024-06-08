@@ -44,17 +44,11 @@
 // __device__  int   a[256][512][512];  // file scope
 // __device__  float b[256][512][512];  // file scope
 
-
-// Notice the array dimensions are in order z, y, x going from left to
-// right, where memory is allocated so the adjacent x values are adjacent in memory. This is standard in
-// C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
-// “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
-// variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
 __device__  int   a[256][512][1024];  // file scope
 __device__  float b[256][512][1024];  // file scope
 
-
 //                         1024    512     256     1234567
+// These numbers DO NOT CHANGE FOR THIS KERNEL FUNCTION!
 __global__ void grid3D(int nx, int ny, int nz, int id)
 {
 
@@ -90,9 +84,6 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	int y = blockIdx.y*blockDimy + threadIdx.y; // in arrays
 	int z = blockIdx.z*blockDimz + threadIdx.z; // 
 
-	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
-
-	int array_size = nx * ny * nz;
 	int block_size = blockDimx * blockDimy * blockDimz;
 	int grid_size  = gridDimx * gridDimy * gridDimz;
 
@@ -103,8 +94,15 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 	int thread_rank_in_grid = (block_rank_in_grid * block_size) + thread_rank_in_block;
 
-	// do some work here
-	// ... notice the order of the dimensions! ... it's NOT x,y,z .. !
+	// These next 2 lines have nothing to do with the kernel ... 
+	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
+	int array_size = nx * ny * nz;
+
+	// Notice the array dimensions are in order z, y, x going from left to
+	// right, where memory is allocated so the adjacent x values are adjacent in memory. This is standard in
+	// C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
+	// “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
+	// variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
 	a[z][y][x] = thread_rank_in_grid;
 	b[z][y][x] = sqrtf((float)a[z][y][x]);
 
@@ -145,13 +143,19 @@ int main(int argc,char *argv[])
 	return 0;
 }
 
+
+// __device__  int   a[256][512][1024];  // file scope
+// __device__  float b[256][512][1024];  // file scope
+// Console Output ...
+// Passed in 67108864-1=67108863 for the id ... very last thread in the grid! Anything higher than this and we get no output
+
 // --- START ---
 // array size   1024 x 512 x 256 = 134217728
 // thread  grid  16 x  64 x 128 = 131072
 // thread block  32 x   8 x   2 = 512
 // total number of threads in grid 131072 x 512 = 67108864
-// a[4][180][359] = 1234567 
-// b[4][180][359] = 1111.110718 
-// [block_rank_in_grid 2411 x block_size 512] + thread_rank_in_block 135 = thread_rank_in_grid 1234567
-// block_rank_in_grid = 2411 thread_rank_in_block = 135 rank of thread_rank_in_grid = 1234567
+// a[255][511][511] = 67108863 
+// b[255][511][511] = 8192.000000 
+// [block_rank_in_grid 131071 x block_size 512] + thread_rank_in_block 511 = thread_rank_in_grid 67108863
+// block_rank_in_grid = 131071 thread_rank_in_block = 511 rank of thread_rank_in_grid = 67108863
 // --- END ---
