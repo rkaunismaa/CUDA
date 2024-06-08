@@ -98,11 +98,10 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 
 	int total_threads = block_size * grid_size;
 
-	// 
-	int thread_rank_in_block = (((threadIdx.z * blockDimy) + threadIdx.y) * blockDimx) + threadIdx.x;
 	int block_rank_in_grid  =  (((blockIdx.z * gridDimy) + blockIdx.y) * gridDimx) + blockIdx.x;
+	int thread_rank_in_block = (((threadIdx.z * blockDimy) + threadIdx.y) * blockDimx) + threadIdx.x;
 
-	int thread_rank_in_grid = thread_rank_in_block + (block_size * block_rank_in_grid);
+	int thread_rank_in_grid = (block_rank_in_grid * block_size) + thread_rank_in_block;
 
 	// do some work here
 	// ... notice the order of the dimensions! ... it's NOT x,y,z .. !
@@ -118,11 +117,14 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 		printf("thread  grid %3d x %3d x %3d = %d\n", gridDimx, gridDimy, gridDimz, grid_size);
 		printf("thread block %3d x %3d x %3d = %d\n", blockDimx, blockDimy, blockDimz, block_size);
 		
-		printf("total number of threads in grid %d\n", total_threads);
+		printf("total number of threads in grid %3d x %3d = %d\n", grid_size, block_size, total_threads);
 
-		printf("a[%d][%d][%d] = %i and b[%d][%d][%d] = %f\n", z, y, x, a[z][y][x], z, y, x, b[z][y][x]);
+		printf("a[%d][%d][%d] = %i \n", z, y, x, a[z][y][x]);
+		printf("b[%d][%d][%d] = %f \n", z, y, x, b[z][y][x]);
 
-		printf("rank_in_block = %d rank_in_grid = %d rank of block_rank_in_grid = %d\n", thread_rank_in_block, thread_rank_in_grid, block_rank_in_grid);
+		printf("[block_rank_in_grid %d x block_size %d] + thread_rank_in_block %d = thread_rank_in_grid %d\n", block_rank_in_grid, block_size, thread_rank_in_block, thread_rank_in_grid);
+
+		printf("block_rank_in_grid = %d thread_rank_in_block = %d rank of thread_rank_in_grid = %d\n", block_rank_in_grid, thread_rank_in_block, thread_rank_in_grid);
 		
 		printf("--- END ---\n");
 	}
@@ -147,7 +149,9 @@ int main(int argc,char *argv[])
 // array size   1024 x 512 x 256 = 134217728
 // thread  grid  16 x  64 x 128 = 131072
 // thread block  32 x   8 x   2 = 512
-// total number of threads in grid 67108864
-// a[4][180][359] = 1234567 and b[4][180][359] = 1111.110718
-// rank_in_block = 135 rank_in_grid = 1234567 rank of block_rank_in_grid = 2411
+// total number of threads in grid 131072 x 512 = 67108864
+// a[4][180][359] = 1234567 
+// b[4][180][359] = 1111.110718 
+// [block_rank_in_grid 2411 x block_size 512] + thread_rank_in_block 135 = thread_rank_in_grid 1234567
+// block_rank_in_grid = 2411 thread_rank_in_block = 135 rank of thread_rank_in_grid = 1234567
 // --- END ---
