@@ -5,9 +5,9 @@
 # Makefile for a CUDA program in the current directory
 #
 # Usage:
-#   make             - Build the program with the default name (my_cuda_program)
-#   make NAME=<name> - Build the program with the specified name
-#   make clean       - Clean up the build files (object files and the executable)
+#   make                    - Build the program with the default name (my_cuda_program)
+#   make NAME=<name>        - Build the program with the specified name
+#   make clean NAME=<name>  - Clean up the build files (object files and the executable)
 #
 # Example:
 #   make NAME=cuda_app  - Build the program and name the executable cuda_app
