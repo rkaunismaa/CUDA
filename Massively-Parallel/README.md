@@ -1,3 +1,7 @@
+#### Sunday, June 9, 2024
+
+I think I am going to stick with [this](https://github.com/R100001/Programming-Massively-Parallel-Processors) repo as a code reference for this book.
+
 #### Wednesday, June 5, 2024
 
 This folder will contain the code samples referenced in the book "Programming Massively Parallel Processors".
