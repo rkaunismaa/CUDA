@@ -270,6 +270,14 @@ Another resource I plan on going through is [Programming Massively Parallel Proc
 
 <img src="images/ProgrammingMassivelyParallelProcessors.jpg" alt="3D Rank Formula" width="300">
 
+# Sunday, June 9, 2024
+
+Going to start running this code in the 'milvus' conda environment because I want to use opencv.
+
+Whelp, went to run 'mamba install conda-forge::opencv' on milvus, and bailed cuz too much stuff would change and most likely break this environment. 
+
+Looks like the conda environment 'hhgnnup' is a safer environment to install opencv to ... but yeah, hhgnnup is a python environment, so why am I even looking into this??
+
 
 
 

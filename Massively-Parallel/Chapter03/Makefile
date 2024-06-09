@@ -13,10 +13,14 @@
 #   make NAME=cuda_app  - Build the program and name the executable cuda_app
 #
 # Compiler
-NVCC := /usr/local/cuda/bin/nvcc
+# NVCC := /usr/local/cuda/bin/nvcc
+CUDA_PATH=/usr/local/cuda
+HOST_COMPILER ?= g++
+NVCC=${CUDA_PATH}/bin/nvcc -ccbin ${HOST_COMPILER}
 
 # Compiler flags for debug mode for Ampere GPU (compute capability 8.0)
-NVCCFLAGS := -G -O0 -arch=sm_80
+# NVCCFLAGS := -G -O0 -arch=sm_80
+NVCCFLAGS := -g -G -O0 -arch=sm_80 -m64 -lineinfo
 
 # Name of the program (can be passed as a variable)
 NAME ?= my_cuda_program

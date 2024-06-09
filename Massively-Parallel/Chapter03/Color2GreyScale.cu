@@ -4,17 +4,51 @@
 
 
 #include <stdio.h>
+#include <string>
 #include <cuda.h>
 #include <cuda_runtime.h>
 
+#include <iostream>
+#include <fstream>
+// #include <opencv2/opencv.hpp>
+// #include <jpeglib.h>
+// #include <stdexcept>
+
+// Function to check if the file exists
+bool fileExists(const std::string& filename) {
+    std::ifstream file(filename);
+    return file.good();
+}
+
+// Function to get image dimensions
+// void getImageDimensions(const std::string& filename, int& width, int& height) {
+//     cv::Mat image = cv::imread(filename);
+//     if (image.empty()) {
+//         throw std::runtime_error("Could not open or find the image");
+//     }
+//     width = image.cols;
+//     height = image.rows;
+// }
+
 int main(int argc, char * argv[])
 {
-    // Process command line arguments
-    if (argc != 1)
-    { 
-        printf("You must pass in the full path to the target color image!");
+
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <image_file>" << std::endl;
         return -1;
     }
+
+    std::string filename = argv[1];
+
+    if (!fileExists(filename)) {
+        std::cerr << "File does not exist: " << filename << std::endl;
+        return -1;
+    }
+    
+
+    
+    
+
 
 
 

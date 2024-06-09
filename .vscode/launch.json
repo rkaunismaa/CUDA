@@ -7,8 +7,8 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
-      "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale.",
-      "args": "../../images/GregLemond_BernardHinault.jpg"
+      "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
+      "args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg"
 
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
       // "args": "12345, 288, 256"
