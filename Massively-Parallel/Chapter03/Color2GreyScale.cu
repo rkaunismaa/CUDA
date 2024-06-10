@@ -31,10 +31,30 @@ void getImageDimensions(const std::string& filename, int& width, int& height) {
     height = image.rows;
 }
 
+std::string appendToFilename(const std::string& filename, const std::string& append) {
+    // Find the position of the last period in the filename
+    size_t lastDotPosition = filename.find_last_of(".");
+    
+    // If there's no period found or it's not a .jpg file, return the original filename
+    if (lastDotPosition == std::string::npos || filename.substr(lastDotPosition) != ".jpg") {
+        return filename;
+    }
+    
+    // Insert "_2" before the file extension
+    std::string newFilename = filename.substr(0, lastDotPosition) + append + filename.substr(lastDotPosition);
+    
+    return newFilename;
+}
+
+
+
+
 // CUDA kernel (simple example)
 __global__ void processImageKernel(unsigned char* d_image, int width, int height) {
+
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
+    
     if (x < width && y < height) {
         // Example: Invert the color
         int index = y * width + x;
@@ -50,8 +70,14 @@ int main(int argc, char * argv[])
         return -1;
     }
 
+    // "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/Color2GreyScale"
     std::string filename = argv[1];
-    //std::string processedFilename = argv[2];
+    // std::string processedFilename = argv[2];
+
+    // std::string filename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault.jpg";
+    // std::string processedFilename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault_2.jpg";
+    std::string processedFilename = appendToFilename(filename, "_2") ;
+
 
     // if (!fileExists(filename)) {
     //     std::cerr << "File does not exist: " << filename << std::endl;
@@ -90,7 +116,7 @@ int main(int argc, char * argv[])
     cudaMemcpy(image.data, d_image, imageSize, cudaMemcpyDeviceToHost);
 
     // Save the processed image
-    std::string processedFilename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault_2.jpg" ;
+    // std::string processedFilename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault_2.jpg" ;
     cv::imwrite(processedFilename, image);
 
     // Clean up
