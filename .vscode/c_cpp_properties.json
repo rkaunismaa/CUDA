@@ -4,7 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/local/cuda/include"
+                "/usr/local/cuda/include",
+                "/usr/include/opencv4"
+
+                // "/home/rob/miniforge3/envs/hhgnnup/include/opencv4"
+                // /home/rob/miniforge3/envs/hhgnnup/include/opencv4/opencv2/opencv.hpp
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

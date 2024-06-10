@@ -278,6 +278,12 @@ Whelp, went to run 'mamba install conda-forge::opencv' on milvus, and bailed cuz
 
 Looks like the conda environment 'hhgnnup' is a safer environment to install opencv to ... but yeah, hhgnnup is a python environment, so why am I even looking into this??
 
+# Monday, June 10, 2024
+
+Today I installed OpenCV to kauwitb using ... cuz why the hell not, right?
+
+* sudo apt install libopencv-dev
+
 
 
 

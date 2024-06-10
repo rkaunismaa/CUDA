@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "chrono": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "fstream": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "C_Cpp.default.includePath": [

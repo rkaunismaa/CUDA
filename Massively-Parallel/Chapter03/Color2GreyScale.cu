@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 // #include <opencv2/opencv.hpp>
+// #include <opencv2/opencv.hpp>
 // #include <jpeglib.h>
 // #include <stdexcept>
 
@@ -21,14 +22,17 @@ bool fileExists(const std::string& filename) {
 }
 
 // Function to get image dimensions
-// void getImageDimensions(const std::string& filename, int& width, int& height) {
-//     cv::Mat image = cv::imread(filename);
-//     if (image.empty()) {
-//         throw std::runtime_error("Could not open or find the image");
-//     }
-//     width = image.cols;
-//     height = image.rows;
-// }
+void getImageDimensions(const std::string& filename, int& width, int& height) {
+
+    // cv::Mat image = cv::imread(filename);
+
+    // if (image.empty()) {
+    //     throw std::runtime_error("Could not open or find the image");
+    // }
+
+    // width = image.cols;
+    // height = image.rows;
+}
 
 int main(int argc, char * argv[])
 {
