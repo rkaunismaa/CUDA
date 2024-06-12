@@ -108,7 +108,7 @@ int main(int argc, char * argv[])
     unsigned char* h_input_image, *h_output_image;
     unsigned char* d_input_image, *d_output_image;
 
-    int image_width, image_height;
+    int block_dim, size, image_width, image_height;
     try {
         getImageDimensions(filename, image_width, image_height);
         std::cout << "Image dimensions: " << image_width << "x" << image_height << std::endl;
@@ -169,7 +169,7 @@ int main(int argc, char * argv[])
     // std::string processedFilename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault_2.jpg" ;
     // cv::imwrite(processedFilename, image);
 
-    cv::imwrite(processedFilename, h_output_image);
+    // cv::imwrite(processedFilename, h_output_image);
 
     // Clean up
     //cudaFree(d_image);
