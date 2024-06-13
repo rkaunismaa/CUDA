@@ -134,6 +134,8 @@ int main(int argc, char * argv[])
     //image_height = atoi(argv[3]);
     size = image_width * image_height;
 
+    int sourceSize = size * NUM_CHANNELS * sizeof(unsigned char);
+
     // Allocate memory for the input and output images on host
     h_input_image = (unsigned char*) malloc(NUM_CHANNELS * size * sizeof(unsigned char));
     h_output_image = (unsigned char*) malloc(size * sizeof(unsigned char));
@@ -141,6 +143,14 @@ int main(int argc, char * argv[])
     // Allocate memory for the input and output images on device
     cudaMalloc((void**) &d_input_image, NUM_CHANNELS * size * sizeof(unsigned char));
     cudaMalloc((void**) &d_output_image, size * sizeof(unsigned char));
+
+    // Initialize the input image with random values between 0 and 255
+    // srand(time(NULL));
+    // for(int i = 0; i < NUM_CHANNELS * size; ++i)
+    //     h_input_image[i] = rand() % 256;
+
+    memcpy(h_input_image, image.data, size * NUM_CHANNELS * sizeof(unsigned char)) ;
+    // h_input_image = image.data ;
 
     // Copy the input image to the device
     cudaMemcpy(d_input_image, h_input_image, NUM_CHANNELS * size * sizeof(unsigned char), cudaMemcpyHostToDevice);
@@ -169,7 +179,7 @@ int main(int argc, char * argv[])
     // std::string processedFilename = "/home/rob/Data/Documents/Github/rkaunismaa/CUDA/images/GregLemond_BernardHinault_2.jpg" ;
     // cv::imwrite(processedFilename, image);
 
-    // cv::imwrite(processedFilename, h_output_image);
+    cv::imwrite(processedFilename, h_output_image);
 
     // Clean up
     //cudaFree(d_image);

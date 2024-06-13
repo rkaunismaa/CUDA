@@ -15,13 +15,15 @@ CUDA_INC = /usr/local/cuda/include
 CUDA_LIB = /usr/local/cuda/lib64
 
 # Source files
-SRCS = Color2GreyScale.cu
+# SRCS = Color2GreyScale.cu
+SRCS = Image2GreyScale.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
 
 # Output binary
-TARGET = Color2GreyScale
+# TARGET = Color2GreyScale
+TARGET = Image2GreyScale
 
 # Compile CUDA source file to object file
 %.o: %.cu

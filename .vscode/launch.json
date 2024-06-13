@@ -8,7 +8,8 @@
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
-      "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
+     // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
+     "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Image2GreyScale",
       "args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg"
       //"args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg, ${workspaceFolder}/images/GregLemond_BernardHinault_processed.jpg"
 
