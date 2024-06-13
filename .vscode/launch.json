@@ -9,7 +9,8 @@
 
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
-     "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Image2GreyScale",
+     // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Image2GreyScale",
+     "program": "${workspaceFolder}/Massively-Parallel/Chapter03/BlurImage2",
       "args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg"
       //"args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg, ${workspaceFolder}/images/GregLemond_BernardHinault_processed.jpg"
 
