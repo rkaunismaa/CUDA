@@ -33,11 +33,13 @@ __global__ void box_blur_kernel(unsigned char *input, unsigned char *output, int
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
     if (x < width && y < height) {
+
         int half_blur_size = blur_size / 2;
         int r = 0, g = 0, b = 0, count = 0;
 
         for (int ky = -half_blur_size; ky <= half_blur_size; ++ky) {
             for (int kx = -half_blur_size; kx <= half_blur_size; ++kx) {
+
                 int nx = min(max(x + kx, 0), width - 1);
                 int ny = min(max(y + ky, 0), height - 1);
 
@@ -45,6 +47,7 @@ __global__ void box_blur_kernel(unsigned char *input, unsigned char *output, int
                 r += input[offset];
                 g += input[offset + 1];
                 b += input[offset + 2];
+                
                 count++;
             }
         }

@@ -10,8 +10,16 @@
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Image2GreyScale",
-     "program": "${workspaceFolder}/Massively-Parallel/Chapter03/BlurImage3",
-      "args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg  15"
+
+    "program": "${workspaceFolder}/Massively-Parallel/Chapter03/MatrixMultiplication",
+    "args": "100000, 1000, 10000"
+    // "args": "10000, 100, 1000"
+      // "args": "1000000, 10000, 100000"
+     
+
+     //"program": "${workspaceFolder}/Massively-Parallel/Chapter03/BlurImage3",
+     // "args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg  15"
+
       //"args": "${workspaceFolder}/images/GregLemond_BernardHinault.jpg, ${workspaceFolder}/images/GregLemond_BernardHinault_processed.jpg"
 
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",

@@ -16,16 +16,14 @@ CUDA_LIB = /usr/local/cuda/lib64
 
 # Source files
 # SRCS = Color2GreyScale.cu
-# SRCS = Image2GreyScale.cu
-SRCS = BlurImage3.cu
+SRCS = MatrixMultiplication.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
 
 # Output binary
 # TARGET = Color2GreyScale
-# TARGET = Image2GreyScal
-TARGET = BlurImage3
+TARGET = MatrixMultiplication
 
 # Compile CUDA source file to object file
 %.o: %.cu
