@@ -17,7 +17,7 @@ CUDA_LIB = /usr/local/cuda/lib64
 # Source files
 # SRCS = Color2GreyScale.cu
 # SRCS = Image2GreyScale.cu
-SRCS = BlurImage2.cu
+SRCS = BlurImage3.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
@@ -25,7 +25,7 @@ OBJS = $(SRCS:.cu=.o)
 # Output binary
 # TARGET = Color2GreyScale
 # TARGET = Image2GreyScal
-TARGET = BlurImage2
+TARGET = BlurImage3
 
 # Compile CUDA source file to object file
 %.o: %.cu
