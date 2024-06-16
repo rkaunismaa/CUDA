@@ -7,12 +7,15 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
+      "program": "${workspaceFolder}/Massively-Parallel/Chapter03/thrust_vector_add",
+    "args": "10000000"
+
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Image2GreyScale",
 
-    "program": "${workspaceFolder}/Massively-Parallel/Chapter03/MatrixMultiplication",
-    "args": "100000, 1000, 10000"
+    // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/MatrixMultiplication",
+  //   "args": "100000, 1000, 10000"
     // "args": "10000, 100, 1000"
       // "args": "1000000, 10000, 100000"
      

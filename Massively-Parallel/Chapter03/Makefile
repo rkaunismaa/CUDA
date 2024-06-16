@@ -16,14 +16,14 @@ CUDA_LIB = /usr/local/cuda/lib64
 
 # Source files
 # SRCS = Color2GreyScale.cu
-SRCS = MatrixMultiplication.cu
+SRCS = thrust_vector_add.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
 
 # Output binary
 # TARGET = Color2GreyScale
-TARGET = MatrixMultiplication
+TARGET = thrust_vector_add
 
 # Compile CUDA source file to object file
 %.o: %.cu
