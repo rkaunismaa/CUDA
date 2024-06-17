@@ -23,20 +23,25 @@ std::string appendToFilename(const std::string& filename, const std::string& app
 
 // CUDA kernel to convert RGB to grayscale
 __global__ void rgb2gray_kernel(unsigned char *rgb, unsigned char *gray, int width, int height) {
+
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
     if (x < width && y < height) {
+
         int rgb_offset = (y * width + x) * 3;
         int gray_offset = y * width + x;
+
         unsigned char r = rgb[rgb_offset];
         unsigned char g = rgb[rgb_offset + 1];
         unsigned char b = rgb[rgb_offset + 2];
+
         gray[gray_offset] = 0.299f * r + 0.587f * g + 0.114f * b;
     }
 }
 
 void rgb2gray(const cv::Mat &input, cv::Mat &output) {
+    
     int width = input.cols;
     int height = input.rows;
 
