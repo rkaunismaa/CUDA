@@ -14,7 +14,7 @@ I think I am going to stick with [this](https://github.com/R100001/Programming-M
 
 This folder will contain the code samples referenced in the book "Programming Massively Parallel Processors".
 
-<img src="../images/ProgrammingMassivelyParallelProcessors.jpg" alt="3D Rank Formula" width="300">
+<img src="../images/ProgrammingMassivelyParallelProcessors.jpg" alt="Programming Massively Parallel Processors" width="300">
 
 The Youtube channel [Programming Massively Parallel Processors](https://www.youtube.com/@pmpp-book) has 3 play-lists, all covering the same material but different times and lecturers. The playlist [AUB Spring 2021 El Hajj](https://www.youtube.com/playlist?list=PLRRuQYjFhpmubuwx-w8X964ofVkW1T8O4) is taught by Izzat El Hajj, who is one of the co-authors of the book. You should probably go with this. 
 
