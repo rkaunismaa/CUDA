@@ -7,8 +7,10 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
-      "program": "${workspaceFolder}/Massively-Parallel/Chapter03/thrust_vector_add",
-    "args": "10000000"
+      "program" : "${workspaceFolder}/NVIDIA/cuda-samples/Samples/1_Utilities/deviceQuery/deviceQuery"
+
+    //   "program": "${workspaceFolder}/Massively-Parallel/Chapter03/thrust_vector_add",
+    // "args": "10000000"
 
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",
      // "program": "${workspaceFolder}/Massively-Parallel/Chapter03/Color2GreyScale",

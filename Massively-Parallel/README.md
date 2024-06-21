@@ -19,3 +19,9 @@ This folder will contain the code samples referenced in the book "Programming Ma
 The Youtube channel [Programming Massively Parallel Processors](https://www.youtube.com/@pmpp-book) has 3 play-lists, all covering the same material but different times and lecturers. The playlist [AUB Spring 2021 El Hajj](https://www.youtube.com/playlist?list=PLRRuQYjFhpmubuwx-w8X964ofVkW1T8O4) is taught by Izzat El Hajj, who is one of the co-authors of the book. You should probably go with this. 
 
 Searching on Github for 'ECE408' yields numerous hits, and I filtered down the hits to [this](https://github.com/eedalong/ECE408), or [this](https://github.com/pixom-ai/NVIDIA-AcceleratedComputing), or [this](https://github.com/R100001/Programming-Massively-Parallel-Processors). I can't seem to find any 'official' release of the code, probably because it is a course, and the University of Illinois would not publicly post the solutions to their course ... just guessing here. 
+
+#### Friday, June 21, 2024
+
+Chapter 4 of the book "Compute Architecture and Scheduling" includes a section on querying existing devices for their properties, which brought to mind the deviceQuery.cpp example found in the Nvidia Cuda Samples repo. So today I grabbed the most current version of this code and dumped it into the Chapter04 folder. 
+
+OK ... so yeah, that was a kinda stupid way to do this considering this repo ALREADY has some of the NVidia Cuda Samples loaded, including deviceQuery.cpp ... so I just verified that code DOES run just fine here, so not gonna mess any more wit the stuff I manually copied into the Chapter04 folder.
