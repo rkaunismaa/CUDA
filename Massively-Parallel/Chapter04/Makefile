@@ -16,14 +16,14 @@ CUDA_LIB = /usr/local/cuda/lib64
 
 # Source files
 # SRCS = Color2GreyScale.cu
-SRCS = deviceQuery.cu
+SRCS = deviceQuery_GPT.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
 
 # Output binary
 # TARGET = Color2GreyScale
-TARGET = deviceQuery
+TARGET = deviceQuery_GPT
 
 # Compile CUDA source file to object file
 %.o: %.cu

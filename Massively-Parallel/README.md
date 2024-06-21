@@ -25,3 +25,5 @@ Searching on Github for 'ECE408' yields numerous hits, and I filtered down the h
 Chapter 4 of the book "Compute Architecture and Scheduling" includes a section on querying existing devices for their properties, which brought to mind the deviceQuery.cpp example found in the Nvidia Cuda Samples repo. So today I grabbed the most current version of this code and dumped it into the Chapter04 folder. 
 
 OK ... so yeah, that was a kinda stupid way to do this considering this repo ALREADY has some of the NVidia Cuda Samples loaded, including deviceQuery.cpp ... so I just verified that code DOES run just fine here, so not gonna mess any more wit the stuff I manually copied into the Chapter04 folder.
+
+But just out of curiosity, I asked ChatGPT to "Generate a cuda program that queries existing devices and returns their capabilities to the terminal window." and it produced the code deviceQuery_GPT.cu which was placed into the Chapter04 folder. 
