@@ -38,7 +38,9 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
 
 int main() {
 
-    int width = 18432; // Adjusted size for 4GB VRAM usage
+    // int width = 18432; // Adjusted size for 4GB VRAM usage
+    int width = 36864; // Adjusted size for 8GB VRAM usage 2 x 18432
+    //int width = 73728; // Adjusted size for 16GB VRAM usage 4 x 18432
 
     size_t size = width * width * sizeof(float);
     float *h_A = (float *)malloc(size);
