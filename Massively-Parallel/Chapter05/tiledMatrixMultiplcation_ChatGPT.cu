@@ -2,6 +2,8 @@
 // Another example generated b ChatGPT!
 // https://chatgpt.com/c/beb320a9-c8cb-49eb-9996-3820bf1a1b45
 
+// Tile Width: 4, Time elapsed: 15 minutes 35 seconds ... no jack running stuff ... 
+// Tile Width: 4, Time elapsed: 18 minutes 38 seconds ... jack started running stuff so this is skewed ... 
 // Tile Width: 8, Time elapsed: 3 minutes 50 seconds
 // Tile Width: 16, Time elapsed: 3 minutes 26 seconds
 // Tile Width: 32, Time elapsed: 3 minutes 56 seconds
