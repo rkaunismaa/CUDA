@@ -27,3 +27,7 @@ Chapter 4 of the book "Compute Architecture and Scheduling" includes a section o
 OK ... so yeah, that was a kinda stupid way to do this considering this repo ALREADY has some of the NVidia Cuda Samples loaded, including deviceQuery.cpp ... so I just verified that code DOES run just fine here, so not gonna mess any more wit the stuff I manually copied into the Chapter04 folder.
 
 But just out of curiosity, I asked ChatGPT to "Generate a cuda program that queries existing devices and returns their capabilities to the terminal window." and it produced the code deviceQuery_GPT.cu which was placed into the Chapter04 folder. 
+
+#### Saturday, June 22, 2024
+
+Chapter 5 goes into '5.3 Tiling for reduced memory traffic', so I asked ChatGPT [Create an example of a tiled matrix multiplication in CUDA](https://chatgpt.com/c/beb320a9-c8cb-49eb-9996-3820bf1a1b45) which I dumped into tiledMatrixMultiplication_ChatGPT.cu.
