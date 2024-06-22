@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <cuda_runtime.h>
 
-#define TILE_WIDTH 8
+#define TILE_WIDTH 4
 
 // CUDA kernel for tiled matrix multiplication
 __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
