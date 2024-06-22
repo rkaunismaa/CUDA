@@ -30,4 +30,12 @@ But just out of curiosity, I asked ChatGPT to "Generate a cuda program that quer
 
 #### Saturday, June 22, 2024
 
-Chapter 5 goes into '5.3 Tiling for reduced memory traffic', so I asked ChatGPT [Create an example of a tiled matrix multiplication in CUDA](https://chatgpt.com/c/beb320a9-c8cb-49eb-9996-3820bf1a1b45) which I dumped into tiledMatrixMultiplication_ChatGPT.cu.
+Chapter 5 goes into '5.3 Tiling for reduced memory traffic', so I asked ChatGPT [Create an example of a tiled matrix multiplication in CUDA](https://chatgpt.com/c/beb320a9-c8cb-49eb-9996-3820bf1a1b45) which I dumped into tiledMatrixMultiplication_ChatGPT.cu. Damn is ChatGPT ever useful in this learning CUDA journey!
+
+So I thought adjusting the tile size would have a big impact on the processing speed, but it really had very litte ...
+
+* Tile Width: 8, Time elapsed: 3 minutes 50 seconds
+* Tile Width: 16, Time elapsed: 3 minutes 26 seconds
+* Tile Width: 32, Time elapsed: 3 minutes 56 seconds
+
+... the question is why??
