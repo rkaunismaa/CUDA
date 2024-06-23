@@ -2,16 +2,22 @@
 // Another example generated b ChatGPT!
 // https://chatgpt.com/c/beb320a9-c8cb-49eb-9996-3820bf1a1b45
 
+// Saturday, June 22, 2024
 // Tile Width: 4, Time elapsed: 15 minutes 35 seconds ... no jack running stuff ... 
 // Tile Width: 4, Time elapsed: 18 minutes 38 seconds ... jack started running stuff so this is skewed ... 
 // Tile Width: 8, Time elapsed: 3 minutes 50 seconds
 // Tile Width: 16, Time elapsed: 3 minutes 26 seconds
 // Tile Width: 32, Time elapsed: 3 minutes 56 seconds
 
+// Sunday, June 23, 2024
+// Tile Width: 32, Time elapsed: 3 minutes 56 seconds
+// Tile Width: 32, Time elapsed: 3 minutes 56 seconds
+// NO TILING! : Time elapsed: 3 minutes 50 seconds
+
 #include <stdio.h>
 #include <cuda_runtime.h>
 
-#define TILE_WIDTH 4
+#define TILE_WIDTH 32
 
 // CUDA kernel for tiled matrix multiplication
 __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
@@ -44,6 +50,22 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
     d_C[Row * width + Col] = Cvalue;
 }
 
+// 'Standard' matrix multiplication
+__global__ void matrixMul(float *d_A, float *d_B, float *d_C, int width) {
+
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    
+    if (row < width && col < width) {
+        float Cvalue = 0.0;
+        for (int k = 0; k < width; ++k) {
+            Cvalue += d_A[row * width + k] * d_B[k * width + col];
+        }
+        d_C[row * width + col] = Cvalue;
+    }
+}
+
+
 int main() {
 
     // int width = 18432; // Adjusted size for 4GB VRAM usage
@@ -56,9 +78,14 @@ int main() {
     float *h_C = (float *)malloc(size);
 
     // Initialize matrices h_A and h_B
-    for (int i = 0; i < width * width; i++) {
-        h_A[i] = 1.0f; // Example initialization
-        h_B[i] = 1.0f; // Example initialization
+    // for (int i = 0; i < width * width; i++) {
+    //     h_A[i] = 1.0f; // Example initialization
+    //     h_B[i] = 1.0f; // Example initialization
+    // }
+    // Initialize matrices h_A and h_B  with random values
+     for (int i = 0; i < width * width; i++) {
+        h_A[i] = static_cast<float>(rand()) / RAND_MAX;
+        h_B[i] = static_cast<float>(rand()) / RAND_MAX;
     }
 
     float *d_A, *d_B, *d_C;
@@ -97,6 +124,33 @@ int main() {
 
     // Output the timing result
     printf("Tile Width: %d, Time elapsed: %d minutes %d seconds\n", TILE_WIDTH, minutes, seconds);
+
+
+
+    // Now let's perform the matrix multiplication without tiling to see the difference!
+    // Record the start event
+    cudaEventRecord(start, 0);
+
+    matrixMul<<<dimGrid, dimBlock>>>(d_A, d_B, d_C, width);
+
+    // Record the stop event
+    cudaEventRecord(stop, 0);
+
+    // Synchronize to wait for the stop event to complete
+    cudaEventSynchronize(stop);
+
+    milliseconds = 0;
+    cudaEventElapsedTime(&milliseconds, start, stop);
+
+    // Convert to minutes:seconds
+    minutes = static_cast<int>(milliseconds / 1000) / 60;
+    seconds = static_cast<int>(milliseconds / 1000) % 60;
+
+    // Output the timing result
+    printf("NO TILING! : Time elapsed: %d minutes %d seconds\n", minutes, seconds);
+
+
+
 
     cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 

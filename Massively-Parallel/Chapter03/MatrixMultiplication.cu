@@ -5,6 +5,7 @@
 
 // Kernel function to multiply matrices A and B
 __global__ void matrixMulKernel(float* A, float* B, float* C, int m, int n, int p) {
+    
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     
