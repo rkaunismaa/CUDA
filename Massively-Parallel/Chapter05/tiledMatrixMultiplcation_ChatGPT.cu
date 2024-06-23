@@ -15,6 +15,7 @@
 
 // CUDA kernel for tiled matrix multiplication
 __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
+
     __shared__ float ds_A[TILE_WIDTH][TILE_WIDTH];
     __shared__ float ds_B[TILE_WIDTH][TILE_WIDTH];
 
@@ -27,6 +28,7 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
     float Cvalue = 0.0;
 
     for (int m = 0; m < (width / TILE_WIDTH); ++m) {
+
         ds_A[ty][tx] = d_A[Row * width + m * TILE_WIDTH + tx];
         ds_B[ty][tx] = d_B[(m * TILE_WIDTH + ty) * width + Col];
 
@@ -45,7 +47,7 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
 int main() {
 
     // int width = 18432; // Adjusted size for 4GB VRAM usage
-    int width = 36864; // Adjusted size for 8GB VRAM usage 2 x 18432 ... this takes up almost 16gb of VRAM ... why?
+    int width = 36864; // Adjusted size for 2 x 18432 = 36864 ... this takes up almost 16gb of VRAM ... which makes sense 
     //int width = 73728; // Adjusted size for 16GB VRAM usage 4 x 18432
 
     size_t size = width * width * sizeof(float);
