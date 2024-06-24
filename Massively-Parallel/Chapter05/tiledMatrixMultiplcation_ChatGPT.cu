@@ -28,13 +28,15 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
     int bx = blockIdx.x;  int by = blockIdx.y;
     int tx = threadIdx.x; int ty = threadIdx.y;
     
+    // identify the row and column of the d_C element to work on
     int Row = by * TILE_WIDTH + ty;
     int Col = bx * TILE_WIDTH + tx;
 
     float Cvalue = 0.0;
-
+    // Loop over the d_A and d_B tiles required to compute the d_C element
     for (int m = 0; m < (width / TILE_WIDTH); ++m) {
 
+        // Collaborative loading of the d_A and d_B tiles into shared memory
         ds_A[ty][tx] = d_A[Row * width + m * TILE_WIDTH + tx];
         ds_B[ty][tx] = d_B[(m * TILE_WIDTH + ty) * width + Col];
 
