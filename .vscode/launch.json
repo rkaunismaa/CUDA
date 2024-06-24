@@ -7,7 +7,7 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
-      "program" : "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplcation_ChatGPT"
+      "program" : "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplicationRectangles_ChatGPT"
 
 //"program" : "${workspaceFolder}/Massively-Parallel/Chapter04/deviceQuery_GPT"
 

@@ -41,3 +41,7 @@ So I thought adjusting the tile size would have a big impact on the processing s
 * Tile Width: 32, Time elapsed: 3 minutes 56 seconds
 
 ... the question is why??
+
+#### Monday, June 24, 2024
+
+Added tiledMatrixMultiplicationRectangles_ChatGPT.cu to demonstrate tiled matrix multiplcation of rectangles. 
