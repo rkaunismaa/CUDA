@@ -284,6 +284,10 @@ Today I installed OpenCV to kauwitb using ... cuz why the hell not, right?
 
 * sudo apt install libopencv-dev
 
+# Tuesday, June 25, 2024
+
+Last while has been spent on going through "Programming Massively Parallel Processors". Was starting to go through "Chapter 6, Performance Considerations" but then thought it may be better to go through the initial chapters of the book "Programming in Parallel with CUDA" so I am now gonna get back to that book, and see where I left off with this other excellent book.
+
 
 
 
