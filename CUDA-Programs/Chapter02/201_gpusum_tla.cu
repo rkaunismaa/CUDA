@@ -24,7 +24,16 @@ __host__ __device__ inline float sinsum(float x, int terms)
 	return sum;
 }
 
-// kernel uses many parallel threads for sinsum calls
+// Our modiﬁcations to the kernel are changing the if in line 15.4 to while and inserting
+// an extra line 15.65 at the end of the while loop. In line 15.65 we increment step by the
+// total number of threads in the grid of thread blocks. The while loop will continue until steps
+// values have been calculated for all (non-zero) user supplied values of blocks and
+// threads. Moreover, and importantly for performance reasons, on each pass through the
+// while loop adjacent threads always address adjacent memory locations. Other ways of
+// traversing through the data could be devised but the one shown here is the simplest and best.
+// This technique of using a while loop with indices having a grid-size stride between passes
+// through the loop is called “thread-linear addressing” and is common in CUDA code. It
+// should always be considered as an option when porting a loop in host code to CUDA.
 __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float step_size)
 {
 	int step = blockIdx.x*blockDim.x + threadIdx.x; // start with unique thread ID
