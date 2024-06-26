@@ -15,10 +15,12 @@ __host__ __device__ inline float sinsum(float x, int terms)
 	float x2 = x*x;
 	float term = x;   // first term of series
 	float sum = term; // sum of terms so far
+
 	for(int n = 1; n < terms; n++){
 		term *= -x2 / (2*n*(2*n+1));
 		sum += term;
 	}
+	
 	return sum;
 }
 
@@ -26,6 +28,7 @@ __host__ __device__ inline float sinsum(float x, int terms)
 __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float step_size)
 {
 	int step = blockIdx.x*blockDim.x+threadIdx.x; // start with unique thread ID
+
 	while(step<steps){
 		float x = step_size*step;
 		sums[step] = sinsum(x,terms);  // save sum
