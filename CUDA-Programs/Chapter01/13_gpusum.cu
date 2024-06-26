@@ -29,13 +29,22 @@ __host__ __device__ inline float sinsum(float x,int terms)
 	return sum;
 }
 
-__global__ void gpu_sin(float *sums,int steps,int terms,float step_size)
+// There is another important point to make about line 15.1. The GPU hardware allocates
+// all the threads in any particular thread block to a single SM unit on the GPU, and these
+// threads are run together very tightly on warp-engines as warps of 32 threads. The variable
+// threadIdx.x is set so that threads in the same warp have consecutive values of
+// this variable; speciﬁcally threadIdx.x%32 is the rank or lane of a thread within its
+// warp (range 0–31) and threadIdx.x/32 is the rank of the warp within the thread
+// block (range 0–7 in our case). Thus, in line 15.6 of the kernel where we store a value in
+// sums[step], the adjacent threads within a given warp have adjacent values of step and
+// so they will address adjacent memory locations in the array sums.
+__global__ void gpu_sin(float *sums,int steps,int terms,float step_size) // line 15.1
 {
 	int step = blockIdx.x*blockDim.x + threadIdx.x; // unique thread ID
 
 	if(step<steps){
 		float x = step_size * step;
-		sums[step] = sinsum(x,terms);  // store sin values in array
+		sums[step] = sinsum(x, terms);  // store sin values in array ... line 15.6
 	}
 }
 
@@ -44,20 +53,42 @@ int main(int argc,char *argv[])
 	int steps = (argc > 1) ? atoi(argv[1]) : 10000000; // get command
 	int terms = (argc > 2) ? atoi(argv[2]) : 1000;     // line arguments
 
+	// threads should be a multiple of
+	// 32 and has a maximum allowed value of 1024 for all current GPUs
 	int threads = 256;
+
+	// For most kernels a good starting point for blocks is <<<4*Nsm, 256>>> where Nsm is the number of SMs on
+	// the target GPU.6
+	// 4090 has 128 Multiprocessors ... 4x128=512
 	int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps
 
 	double pi = 3.14159265358979323;
 	double step_size = pi / (steps-1); // NB n-1 steps between n points
 
+	// This next line creates the array dsums of size steps in the device memory using
+	// the thrust device_vector class as a container. By default the array will be initialised to
+	// zeros on the device. This array is used by the gpu_sin kernel to hold the individual
+	// values returned by calls to the sinsum function.
 	thrust::device_vector<float> dsums(steps);         // GPU buffer 
+
+	// We cannot pass dsums to the kernel directly as thrust was not designed
+	// to make this possible,4 but we can pass a pointer to the memory array managed by the
+	// class. For std::vector objects, the member function data() does this job. While
+	// this function does work for thrust host_vector objects it does not work for
+	// device_vector objects. Therefore we have to use the more complicated cast shown
+	// in this line ...
 	float *dptr = thrust::raw_pointer_cast(&dsums[0]); // get pointer
 
 	cx::timer tim;
 
 	gpu_sin<<<blocks,threads>>>(dptr, steps, terms, (float)step_size);
 
+	// Here we use the host callable reduce function in the thrust library to sum all
+	// the elements of the array dsums in GPU memory. This call involves two steps, ﬁrstly we
+	// perform the required additions on the GPU and secondly we copy the result from GPU
+	// memory to CPU memory. This is often referred to as a D2H (device to host) transfer.
 	double gpu_sum = thrust::reduce(dsums.begin(),dsums.end());
+	
 	double gpu_time = tim.lap_ms(); // get elapsed time
 
 	// Trapezoidal Rule Correction

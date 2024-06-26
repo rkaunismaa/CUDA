@@ -20,18 +20,18 @@ __host__ __device__ inline float sinsum(float x, int terms)
 		term *= -x2 / (2*n*(2*n+1));
 		sum += term;
 	}
-	
+
 	return sum;
 }
 
 // kernel uses many parallel threads for sinsum calls
 __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float step_size)
 {
-	int step = blockIdx.x*blockDim.x+threadIdx.x; // start with unique thread ID
+	int step = blockIdx.x*blockDim.x + threadIdx.x; // start with unique thread ID
 
 	while(step<steps){
 		float x = step_size*step;
-		sums[step] = sinsum(x,terms);  // save sum
+		sums[step] = sinsum(x, terms);  // save sum
 		step += blockDim.x*gridDim.x; //  large stride to next step.
 	}
 }
@@ -40,7 +40,7 @@ __global__ void gpu_sin_tla_forloop(float *sums, int steps, int terms, float ste
 {
 	for(int step = blockIdx.x*blockDim.x+threadIdx.x; step<steps; step += gridDim.x*blockDim.x){
 		float x = step_size*step;
-		sums[step] = sinsum(x,terms);  // save sum
+		sums[step] = sinsum(x, terms);  // save sum
 	}
 }
 
