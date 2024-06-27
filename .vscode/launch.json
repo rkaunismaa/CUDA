@@ -41,8 +41,14 @@
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/205_reduce0",
       //"args": "1234567"
 
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
-      "args" : "1234567"
+      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
+      // "args" : "1234567"
+
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/204_grid3D_linear",
+      "args" : "1234567, 288, 256"
+
+
+
       // "args": "67108863" // Highest possible value that will produce an output!
       // "args": "67108864" // total number of threads in grid ... NO CONSOLE OUTPUT, CUZ THIS IS TOO HIGH!
       //"args": "67108863" // total number of threads in grid - 1

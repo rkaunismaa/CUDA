@@ -288,6 +288,10 @@ Today I installed OpenCV to kauwitb using ... cuz why the hell not, right?
 
 Last while has been spent on going through "Programming Massively Parallel Processors". Was starting to go through "Chapter 6, Performance Considerations" but then thought it may be better to go through the initial chapters of the book "Programming in Parallel with CUDA" so I am now gonna get back to that book, and see where I left off with this other excellent book.
 
+# Thursday, June 27, 2024
+
+"Programming in Parallel with CUDA", "Chapter 2 Thinking and Coding in Parallel"goes into great detail about different launch configurations and how to most affectively launch different kinds of applications. The knowledge in here is really worth getting a handle on ...
+
 
 
 
