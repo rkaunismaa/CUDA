@@ -22,7 +22,18 @@ __host__ __device__ inline float sinsum(float x, int terms)
 	}
 
 	return sum;
+
 }
+
+// __global__ void gpu_sin(float *sums,int steps,int terms,float step_size) // line 15.1
+// {
+// 	int step = blockIdx.x*blockDim.x + threadIdx.x; // unique thread ID
+
+// 	if(step<steps){  // line 15.4
+// 		float x = step_size * step;
+// 		sums[step] = sinsum(x, terms);  // store sin values in array ... line 15.6
+// 	}
+// }
 
 // Our modiﬁcations to the kernel are changing the if in line 15.4 to while and inserting
 // an extra line 15.65 at the end of the while loop. In line 15.65 we increment step by the
@@ -41,7 +52,7 @@ __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float s
 	while(step<steps){
 		float x = step_size*step;
 		sums[step] = sinsum(x, terms);  // save sum
-		step += blockDim.x*gridDim.x; //  large stride to next step.
+		step += blockDim.x*gridDim.x; //  large stride to next step. ... line 15.65
 	}
 }
 
