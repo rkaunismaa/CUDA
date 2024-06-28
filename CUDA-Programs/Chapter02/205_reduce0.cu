@@ -12,6 +12,21 @@
 // C:\bin\reduce0.exe
 // sum of 16777216 random numbers: host 8388314.9 15.595 ms, GPU 8388315.0 0.569 ms
 
+
+// Reduce itself involves ﬁnding the arithmetic sum
+// of the numbers, but other operations such as max or min would require similar code.
+// As a speciﬁc case, consider the problem of summing N ﬂoating point numbers stored in
+// the GPUs global memory. The ﬁrst point to recognise is that each data item just requires a
+// single add; thus we will be limited by memory access speed not arithmetic performance. This
+// is the exact opposite to the situation in Example 1.3. We want to use as many threads as
+// possible in order to hide memory latency efﬁciency so our basic algorithm is as shown in the
+// box and illustrated in Figure 2.2.
+
+// Reduce Algorithm 1: Parallel sum of N numbers
+// • Use N/2 threads to get N/2 pairwise sums
+// • Set N = N/2 and iterate till N=1
+
+
 #include "../include/cx.h"
 #include "cxtimers.h"
 #include <random>
