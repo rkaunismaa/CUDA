@@ -35,7 +35,7 @@
 // Lines 4–8: Show the reduce0 kernel which is very simple; each thread ﬁnds its rank, tid, in the
 // grid and, making the tacit assumption that tid is in the range 0 to m-1, adds the appropriate
 // element from the top half of the array to the bottom half.
-__global__ void reduce0(float *x,int m) // line 4 ...
+__global__ void reduce0(float *x, int m) // line 4 ...
 {
 	int tid = (blockDim.x * blockIdx.x) + threadIdx.x;
 
@@ -84,10 +84,13 @@ int main(int argc,char *argv[])
 	// threads are set so that the total number of threads in the grid is exactly m. This code will fail if
 	// N is not a power of 2 due to rounding down errors at one or more steps in the process.
 	tim.reset(); // line 24
-	for(int m = N/2; m>0; m /= 2) {
-		int threads = std::min(256,m);
-		int blocks =  std::max(m/256,1);
-		reduce0<<<blocks,threads>>>(dev_x.data().get(),m); // line 28
+	for(int m = N/2; m>0; m /= 2) { 
+
+		int threads = std::min(256, m);
+		int blocks =  std::max(m/256, 1);
+
+		reduce0<<<blocks,threads>>>( dev_x.data().get(), m); // line 28
+
 	}
 	cudaDeviceSynchronize();
 	double t2 = tim.lap_ms(); // line 31
