@@ -39,6 +39,7 @@ __global__ void reduce0(float *x, int m) // line 4 ...
 {
 	int tid = (blockDim.x * blockIdx.x) + threadIdx.x;
 
+	// Another thing to think about when looking at kernel code is the sheer power of the GPU ... 
 	// line 7 which does the additions will be executed in parallel by all the cores on the GPU, potentially
 	// delivering one or more operations for each core on each clock-cycle.
 	x[tid] += x[tid+m];  // line 7
@@ -80,7 +81,7 @@ int main(int argc,char *argv[])
 	// for loop the reduce0 kernel called in line 28 causes the top half of the array dev_x to be
 	// “folded” down to an array of size m by adding the top m elements to the bottom m elements. The last
 	// pass through the loop has m=1 and leaves the ﬁnal sum in dev_x[0]; this value is copied back to
-	// the host in line 35. Lines 28–29: Within the for loop the kernel launch parameters blocks and
+	// the host in line 32. Lines 28–29: Within the for loop the kernel launch parameters blocks and
 	// threads are set so that the total number of threads in the grid is exactly m. This code will fail if
 	// N is not a power of 2 due to rounding down errors at one or more steps in the process.
 	tim.reset(); // line 24
@@ -91,13 +92,13 @@ int main(int argc,char *argv[])
 
 		reduce0<<<blocks,threads>>>( dev_x.data().get(), m); // line 28
 
-	}
-	cudaDeviceSynchronize();
+	} // line 29
+	cudaDeviceSynchronize();  // line 30
 	double t2 = tim.lap_ms(); // line 31
 
 	// In CUDA programs a kernel launch such as that used in line 28 will not block the host which will
 	// proceed to the next line of the host program without waiting for the kernel call to ﬁnish. In this case
-	// that means all the kernel calls (23 in all for N=224) will be rapidly queued to run successively on the
+	// that means all the kernel calls (23 in all for N=2 to the 24) will be rapidly queued to run successively on the
 	// GPU. In principle the host can do other CPU work while these kernels are running on the GPU. In this
 	// case we just want to measure the duration of the reduction operation so before making the time
 	// measurement we must use a cudaDeviceSynchronize call in line 30 which causes the host to
@@ -129,3 +130,4 @@ int main(int argc,char *argv[])
 // My values ...
 //  "program": "${workspaceFolder}/CUDA-Programs/Chapter02/205_reduce0", 
 // sum of 16777216 random numbers: host 8389645.1 415.011 ms, GPU 8389646.0 17.529 ms
+// sum of 16777216 random numbers: host 8389645.1 423.265 ms, GPU 8389646.0 24.017 ms ... ran this on Saturday, June 29, 2024 ... LMStudio was running

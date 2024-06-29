@@ -72,7 +72,7 @@ int main(int argc,char *argv[])
 	thrust::device_vector<float> dsums(steps);         // GPU buffer 
 
 	// We cannot pass dsums to the kernel directly as thrust was not designed
-	// to make this possible,4 but we can pass a pointer to the memory array managed by the
+	// to make this possible, but we can pass a pointer to the memory array managed by the
 	// class. For std::vector objects, the member function data() does this job. While
 	// this function does work for thrust host_vector objects it does not work for
 	// device_vector objects. Therefore we have to use the more complicated cast shown
