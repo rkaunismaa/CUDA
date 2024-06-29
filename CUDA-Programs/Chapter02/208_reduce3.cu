@@ -25,9 +25,19 @@ __global__ void reduce3(float *y,float *x,int N)
 	tsum[id] = 0.0f;
 	for(int k=tid;k<N;k+=stride) tsum[id] += x[k];
 	__syncthreads();
-	int block2 = cx::pow2ceil(blockDim.x); // next higher power of 2
-	for(int k=block2/2; k>0; k >>= 1){     // power of 2 reduction loop
-		if(id<k && id+k < blockDim.x) tsum[id] += tsum[id+k];
+
+	// Line 10.1: Here we add a new variable block2 which is set the value of blockDim.x rounded up to
+	// the lowest power of 2 greater than or equal to blockDim.x. We use the cx utility function pow2ceil
+	// for this. That function is implemented using the NVIDIA intrinsic function __clz(int n) which
+	// returns the number of the most signiﬁcant non-zero bit in n. This is a device-only function.
+	int block2 = cx::pow2ceil(blockDim.x); // next higher power of 2 ... line 10.1
+	
+	// Line 10.2: This is the same as line 10 in reduce2 except we use the rounded up block2/2 as the
+	// starting value of k.
+	for(int k=block2/2; k>0; k >>= 1){     // power of 2 reduction loop  ... line 10.2
+
+		// Line 11: This corresponds to line 11 of reduce2 with an added out-of-range check on id+k.
+		if(id<k && id+k < blockDim.x) tsum[id] += tsum[id+k]; // line 11
 		__syncthreads();
 	}
 	if(id==0) y[blockIdx.x] = tsum[0]; // store one value per block
@@ -39,6 +49,7 @@ int main(int argc,char *argv[])
 	int blocks  = (argc > 2) ? atoi(argv[2]) : 256;  // power of 2
 	int threads = (argc > 3) ? atoi(argv[3]) : 256;
 	int nreps   = (argc > 4) ? atoi(argv[4]) : 1000; // set this to 1 for correct answer or >> 1 for timing tests
+
 	thrust::host_vector<float>    x(N);
 	thrust::device_vector<float>  dx(N);
 	thrust::device_vector<float>  dy(blocks);
@@ -46,15 +57,20 @@ int main(int argc,char *argv[])
 	// initialise x with random numbers and copy to dx.
 	std::default_random_engine gen(12345678);
 	std::uniform_real_distribution<float> fran(0.0,1.0);
+	
 	for(int k = 0; k<N; k++) x[k] = fran(gen);
+	
 	dx = x;  // H2D copy (N words)
+	
 	cx::timer tim;
+	
 	double host_sum = 0.0;
 	for(int k = 0; k<N; k++) host_sum += x[k]; // host reduce!
 	double t1 = tim.lap_ms();
 
 	// simple GPU reduce for any value of N
 	tim.reset();
+
 	double gpu_sum = 0.0;
 	for(int rep=0;rep<nreps;rep++){
 		reduce3<<<blocks,threads,threads*sizeof(float)>>>(dy.data().get(),dx.data().get(),N);
@@ -63,7 +79,22 @@ int main(int argc,char *argv[])
 	}
 	cudaDeviceSynchronize();
 	double t2 = tim.lap_ms()/nreps;
+	
 	//double gpu_sum = dx[0];  // D2H copy (1 word)
 	printf("sum of %d numbers: host %.1f %.3f ms GPU %.1f %.3f ms\n",N,host_sum,t1,gpu_sum,t2);
+
 	return 0;
 }
+
+// D:\ >reduce3.exe 16777216 288 256
+// sum of 16777216 numbers: host 8388314.9 14.012 ms
+// GPU 8388314.5 0.196 ms
+
+// In the last line we see that launching this kernel with exactly 8 thread blocks per SM gives a speed-up
+// of 2.73 compared to reduce0, slightly better than reduce2.
+
+// "program": "${workspaceFolder}/CUDA-Programs/Chapter02/208_reduce3",
+// sum of 16777216 numbers: host 8389645.1 401.875 ms GPU 8389645.0 0.173 ms
+// sum of 16777216 numbers: host 8389645.1 411.263 ms GPU 8389645.0 0.198 ms
+
+
