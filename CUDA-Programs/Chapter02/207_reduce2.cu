@@ -136,3 +136,13 @@ int main(int argc,char *argv[])
 // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/207_reduce2",
 // sum of 16777216 numbers: host 8389645.1 423.552 ms GPU 8389645.0 0.214 ms
 
+// A worthwhile optimisation of the reduce2 kernel would be to drop the restriction that blocks
+// must be a power of 2. This is because in many GPUs the number of SM units is not a power of 2.
+// For example, my GPU has 36 SMs so to keep all SMs equally busy it is better to use 288 rather than
+// 256 for the number of user set value of blocks. We can do this by replacing blockDim.x in
+// line 10 of the reduce2 kernel by the smallest power of 2 greater than or equal to blocks. For
+// blocks = 288 this would be 512. The effect of doing this is that in the ﬁrst pass when k=256,
+// threads with rank 0 to 31 will add values from tsum[256] to tsum[287] to their tsum
+// values. We also have to add an out-of-range check to prevent threads 32-255 from attempting
+// out-of-range additions.
+
