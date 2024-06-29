@@ -97,4 +97,11 @@ int main(int argc,char *argv[])
 // sum of 16777216 numbers: host 8389645.1 401.875 ms GPU 8389645.0 0.173 ms
 // sum of 16777216 numbers: host 8389645.1 411.263 ms GPU 8389645.0 0.198 ms
 
+// The reduce3 kernel is about 70 times faster than the single core host version. While this
+// is not quite as spectacular as our Chapter 1 result for a CPU bound calculation, reduction is a
+// memory bandwidth bound calculation with just one add per read of 4-bytes of memory so we
+// expect reduced performance. Given that the GPU memory bandwidth is only about 10 times
+// that of the CPU the factor 70 improvement shows that other GPU features including the
+// latency hiding are helping speed up this memory bound problem.
+
 
