@@ -308,6 +308,42 @@ The four 'reduce' sample programs in 'CUDA-Programs/Chapter02' demonstrate CUDA 
 
 Notice the biggest improvement by far is from 205_reduce0 to 206_reduce1, but it makes me wonder if there is something wrong with the code in reduce0!
 
+Whelp, to answer that question, I grabbed the original source code from the [repo](https://github.com/RichardAns/CUDA-Programs/tree/main/Chapter02) into reduce0.cu and reduce1.cu, used the same make file to compile and run each and got this ...
+
+1) reduce=> sum of 16777216 random numbers: host 8389645.1 401.184 ms, GPU 8389646.0 0.236 ms
+2) reduce=> reduce1 config 288 256: sum of 16777216 numbers: host 8389645.1 402.904 ms GPU 8389645.0 0.233 ms
+
+Hmmm ... close ... so let's again run 205_reduce0 ... 
+
+3) 205_reduce0 => sum of 16777216 random numbers: host 8389645.1 401.115 ms, GPU 8389646.0 0.233 ms
+
+All three were run from the terminal prompt, NOT IN DEBUG MORE INSIDE OF VSCODE!
+
+Running 205_reduce0 in debug mode inside of VSCode produces ...
+
+* sum of 16777216 random numbers: host 8389645.1 400.497 ms, GPU 8389646.0 18.804 ms
+* sum of 16777216 random numbers: host 8389645.1 397.713 ms, GPU 8389646.0 17.609 ms
+* sum of 16777216 random numbers: host 8389645.1 401.838 ms, GPU 8389646.0 17.757 ms
+
+Conclusion? Yeah, there is a performance difference when running the program from the terminal versus running in debug mode inside of VSCode! Like DUH, RIGHT?!
+
+Hmmm running 206_reduce1 from the terminal versus inside of VSCode in debug mode:
+
+* terminal =====> reduce1 config 288 256: sum of 16777216 numbers: host 8389645.1 400.801 ms GPU 8389645.0 0.238 ms
+* VSCode debug => reduce1 config 288 256: sum of 16777216 numbers: host 8389645.1 400.271 ms GPU 8389645.0 0.244 ms
+
+Hmmm retest running 205_reduce0 from the terminal versus inside of VSCode in debug mode:
+
+* terminal =====> sum of 16777216 random numbers: host 8389645.1 401.088 ms, GPU 8389646.0 0.232 ms
+* VSCode debug => sum of 16777216 random numbers: host 8389645.1 400.599 ms, GPU 8389646.0 17.285 ms
+
+WHY IS THERE SUCH A BLOODY DIFFERENCE IN RUN TIMES???
+
+HMM run reduce0 in VSCode debug mode ...
+
+* sum of 16777216 random numbers: host 8389645.1 400.368 ms, GPU 8389646.0 17.987 ms
+
+Yup! Same difference in performance! WHY??
 
 
 

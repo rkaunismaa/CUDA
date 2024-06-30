@@ -37,13 +37,14 @@
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/206_reduce1",
       // "args": "16777216, 288, 256, 1000"
 
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/reduce0",
 
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/209_reduce4",
+      //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/209_reduce4",
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/208_reduce3",
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/207_reduce2",
-     // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/206_reduce1",
+     //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/206_reduce1",
 
-      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/205_reduce0",
+      //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/205_reduce0",
       //"args": "1234567"
 
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
