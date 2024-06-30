@@ -296,7 +296,7 @@ Last while has been spent on going through "Programming Massively Parallel Proce
 
 <img src="images/PairwiseReduction.png" alt="Pairwise Reduction" width="300">
 
-The book "Programming in Parallel with CUDA" has an excellent, detailed walk through of implementing the 'Parallel Reduce' algorithim, starting from page 40, '2.6 Parallel Reduce'. Study this stuff and learn it cold! This entire parallel reduction secion is based on the excellent resource [Optimizing Parallel Reduction in CUDA](https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf) which I have downloaded and saved into 'CUDA-Programs/Chapter02/Optimizing Parallel Reduction in CUDA.pdf'
+The book "Programming in Parallel with CUDA" has an excellent, detailed walk through of implementing the 'Parallel Reduce' algorithm, starting from page 40, '2.6 Parallel Reduce' ending on page 51. Study this stuff and learn it cold! This entire parallel reduction section is based on the excellent resource [Optimizing Parallel Reduction in CUDA](https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf) which I have downloaded and saved into 'CUDA-Programs/Chapter02/Optimizing Parallel Reduction in CUDA.pdf'
 
 The four 'reduce' sample programs in 'CUDA-Programs/Chapter02' demonstrate CUDA optimization techniques, which are summarized as:
 
