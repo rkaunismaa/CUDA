@@ -102,4 +102,16 @@ int main(int argc,char *argv[])
 	return 0;
 }
 
+// D:\ >hostmult0.exe
+// A 1024 x 1024 B 1024 x 1024 host time 2121.046 ms
+// GFlops 1.013 GBytes 6.076
+
+// The timing result in the last line shows that this calculation runs at about 1 GFlops/sec and is clearly
+// memory bound. The memory bandwidth achieved is about 6 GBytes/sec (8 bytes read and 4 bytes
+// written per term).
+
+// The performance of this code is quite poor but we can improve it signiﬁcantly by adding
+// the C++11 __restrict keyword to the pointer argument declarations in line 9.
+// We do this in the next example, 212_hostmult1.cpp ... 
+
 
