@@ -75,5 +75,8 @@ int main(int argc,char *argv[])
 // pointer is not aliased and aggressive optimisation is safe.1
 
 
+// 211_hostmult0
+// A 1024 x 1024 B 1024 x 1024 host time 5742.313 ms Gflops/sec 0.374
 
+// 212_hostmult1
 // A 1024 x 1024 B 1024 x 1024 host time 5511.667 ms Gflops/sec 0.390
