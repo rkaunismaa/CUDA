@@ -114,4 +114,6 @@ int main(int argc,char *argv[])
 // the C++11 __restrict keyword to the pointer argument declarations in line 9.
 // We do this in the next example, 212_hostmult1.cpp ... 
 
+// A 1024 x 1024 B 1024 x 1024 host time 5742.313 ms Gflops/sec 0.374
+
 

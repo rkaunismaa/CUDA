@@ -51,3 +51,25 @@ int main(int argc,char *argv[])
 		Arow,Acol,Brow,Bcol,t1,gflops);
 	return 0;
 }
+
+// D:\ > hostmult1.exe
+// A 1024 x 1024 B 1024 x 1024 host time 1468.845 ms
+// GFlops 1.462 GBytes 8.772
+
+// We have improved the performance by 44% making this simple change! If you are not
+// familiar with the history of C/C++ this requires some explanation. When a function is
+// declared with a simple pointer argument, the compiler has no way of being certain that there
+// are no other pointers to the same memory location elsewhere in the code. This is called
+// pointer aliasing and in the early days of C when computer memory was a scarce resource,
+// people would deliberately use pointer aliasing to use the same piece of memory for different
+// purposes at different stages in the program. Needless to say, this practice often resulted in
+// hard-to-ﬁnd bugs. On modern systems with 64-bit memory addressing pointer aliasing is
+// completely unnecessary yet the memory of old practice lingers on in modern compilers
+// which are still reluctant to fully optimise code involving simple pointers. Speciﬁcally, they
+// will tend to unnecessarily store intermediate results back to main memory rather than using
+// registers. Adding the restrict qualiﬁer to a pointer declaration tells the compiler that the
+// pointer is not aliased and aggressive optimisation is safe.1
+
+
+
+// A 1024 x 1024 B 1024 x 1024 host time 5511.667 ms Gflops/sec 0.390
