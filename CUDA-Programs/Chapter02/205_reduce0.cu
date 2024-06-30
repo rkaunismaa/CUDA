@@ -35,6 +35,9 @@
 // Lines 4–8: Show the reduce0 kernel which is very simple; each thread ﬁnds its rank, tid, in the
 // grid and, making the tacit assumption that tid is in the range 0 to m-1, adds the appropriate
 // element from the top half of the array to the bottom half.
+// At this point, it is worth pausing to admire
+// the simplicity of the kernel code. We have been able to directly express the idea for implementing a
+// parallel reduction with a 2-line kernel.
 __global__ void reduce0(float *x, int m) // line 4 ...
 {
 	int tid = (blockDim.x * blockIdx.x) + threadIdx.x;

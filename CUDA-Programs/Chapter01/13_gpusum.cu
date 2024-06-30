@@ -53,14 +53,20 @@ int main(int argc,char *argv[])
 	int steps = (argc > 1) ? atoi(argv[1]) : 10000000; // get command
 	int terms = (argc > 2) ? atoi(argv[2]) : 1000;     // line arguments
 
+	// Lines 19.1–19.2: The two lines are added to deﬁne the kernel launch conﬁguration
+	// parameters threads and blocks. In this our ﬁrst example, we use a ﬁxed value
+	// of 256 for threads and a calculated value for blocks which is set to be just big enough
+	// to get the total number of threads in the launch to satisfy threads × blocks ≥
+	// steps.
+
 	// threads should be a multiple of
 	// 32 and has a maximum allowed value of 1024 for all current GPUs
-	int threads = 256;
+	int threads = 256; // line 19.1
 
 	// For most kernels a good starting point for blocks is <<<4*Nsm, 256>>> where Nsm is the number of SMs on
 	// the target GPU.6
 	// 4090 has 128 Multiprocessors ... 4x128=512
-	int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps
+	int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps ... line 19.2
 
 	double pi = 3.14159265358979323;
 	double step_size = pi / (steps-1); // NB n-1 steps between n points

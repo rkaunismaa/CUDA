@@ -294,6 +294,10 @@ Last while has been spent on going through "Programming Massively Parallel Proce
 
 # Sunday, June 30, 2024
 
+<img src="images/PairwiseReduction.png" alt="Pairwise Reduction" width="300">
+
+The book "Programming in Parallel with CUDA" has an excellent, detailed walk through of implementing the 'Parallel Reduce' algorithim, starting from page 40, '2.6 Parallel Reduce'. Study this stuff and learn it cold!
+
 The four 'reduce' sample programs in 'CUDA-Programs/Chapter02' demonstrate CUDA optimization techniques, which are summarized as:
 
 1) 205_reduce0.cu => sum of 16777216 random numbers: host 8389645.1 415.011 ms, GPU 8389646.0 17.529 ms
