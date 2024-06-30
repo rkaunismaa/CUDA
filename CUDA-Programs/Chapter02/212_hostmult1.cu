@@ -52,6 +52,10 @@ int main(int argc,char *argv[])
 	return 0;
 }
 
+// D:\ >hostmult0.exe
+// A 1024 x 1024 B 1024 x 1024 host time 2121.046 ms
+// GFlops 1.013 GBytes 6.076
+
 // D:\ > hostmult1.exe
 // A 1024 x 1024 B 1024 x 1024 host time 1468.845 ms
 // GFlops 1.462 GBytes 8.772
