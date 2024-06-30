@@ -296,7 +296,7 @@ Last while has been spent on going through "Programming Massively Parallel Proce
 
 <img src="images/PairwiseReduction.png" alt="Pairwise Reduction" width="300">
 
-The book "Programming in Parallel with CUDA" has an excellent, detailed walk through of implementing the 'Parallel Reduce' algorithim, starting from page 40, '2.6 Parallel Reduce'. Study this stuff and learn it cold!
+The book "Programming in Parallel with CUDA" has an excellent, detailed walk through of implementing the 'Parallel Reduce' algorithim, starting from page 40, '2.6 Parallel Reduce'. Study this stuff and learn it cold! This entire parallel reduction secion is based on the excellent resource [Optimizing Parallel Reduction in CUDA](https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf) which I have downloaded and saved into 'CUDA-Programs/Chapter02/Optimizing Parallel Reduction in CUDA.pdf'
 
 The four 'reduce' sample programs in 'CUDA-Programs/Chapter02' demonstrate CUDA optimization techniques, which are summarized as:
 
@@ -319,13 +319,13 @@ Hmmm ... close ... so let's again run 205_reduce0 ...
 
 All three were run from the terminal prompt, NOT IN DEBUG MORE INSIDE OF VSCODE!
 
-Running 205_reduce0 in debug mode inside of VSCode produces ...
+Running 205_reduce0 3 times in debug mode inside of VSCode produces ...
 
 * sum of 16777216 random numbers: host 8389645.1 400.497 ms, GPU 8389646.0 18.804 ms
 * sum of 16777216 random numbers: host 8389645.1 397.713 ms, GPU 8389646.0 17.609 ms
 * sum of 16777216 random numbers: host 8389645.1 401.838 ms, GPU 8389646.0 17.757 ms
 
-Conclusion? Yeah, there is a performance difference when running the program from the terminal versus running in debug mode inside of VSCode! Like DUH, RIGHT?!
+Conclusion? Yeah, there is a performance difference when running the program from the terminal versus running in debug mode inside of VSCode! 
 
 Hmmm running 206_reduce1 from the terminal versus inside of VSCode in debug mode:
 
@@ -344,6 +344,8 @@ HMM run reduce0 in VSCode debug mode ...
 * sum of 16777216 random numbers: host 8389645.1 400.368 ms, GPU 8389646.0 17.987 ms
 
 Yup! Same difference in performance! WHY??
+
+This seems to boil down to identifying the differences in the code between reduce0 and reduce1, right? .. 
 
 
 
