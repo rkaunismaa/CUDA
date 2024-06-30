@@ -38,7 +38,8 @@
       // "args": "16777216, 288, 256, 1000"
 
 
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/208_reduce3",
+      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/209_reduce4",
+      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/208_reduce3",
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/207_reduce2",
      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/206_reduce1",
 

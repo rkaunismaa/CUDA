@@ -290,7 +290,20 @@ Last while has been spent on going through "Programming Massively Parallel Proce
 
 # Thursday, June 27, 2024
 
-"Programming in Parallel with CUDA", "Chapter 2 Thinking and Coding in Parallel"goes into great detail about different launch configurations and how to most affectively launch different kinds of applications. The knowledge in here is really worth getting a handle on ...
+"Programming in Parallel with CUDA", "Chapter 2 Thinking and Coding in Parallel" goes into great detail about different launch configurations and how to most affectively launch different kinds of applications. The knowledge in here is really worth getting a handle on ...
+
+# Sunday, June 30, 2024
+
+The four 'reduce' sample programs in 'CUDA-Programs/Chapter02' demonstrate CUDA optimization techniques, which are summarized as:
+
+1) 205_reduce0.cu => sum of 16777216 random numbers: host 8389645.1 415.011 ms, GPU 8389646.0 17.529 ms
+2) 206_reduce1.cu => reduce1 config 288 256: sum of 16777216 numbers: host 8389645.1 422.307 ms GPU 8389645.0 0.293 ms
+3) 207_reduce2.cu => sum of 16777216 numbers: host 8389645.1 423.552 ms GPU 8389645.0 0.214 ms
+4) 208_reduce3.cu => sum of 16777216 numbers: host 8389645.1 411.263 ms GPU 8389645.0 0.198 ms
+5) 209_reduce4.cu => sum of 16777216 numbers: host 8389645.1 402.027 ms GPU 8389645.0 0.169 ms
+
+Notice the biggest improvement by far is from 205_reduce0 to 206_reduce1, but it makes me wonder if there is something wrong with the code in reduce0!
+
 
 
 
