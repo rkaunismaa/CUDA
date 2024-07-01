@@ -347,6 +347,12 @@ Yup! Same difference in performance! WHY??
 
 This seems to boil down to identifying the differences in the code between reduce0 and reduce1, right? .. 
 
+And why can't I successfully compile the cpp programs using the make file from the repo??
+
+# Monday, July 1, 2024
+
+Continuing to drill through the most excellent book "Programming in Parallel with CUDA"
+
 
 
 
