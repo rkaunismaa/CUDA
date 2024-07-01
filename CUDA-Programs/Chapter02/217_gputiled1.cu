@@ -99,3 +99,20 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+// D:\ gputiled1.exe 1024 1024 1024 32
+// A 1024 x 1024 B 1024 x 1024 gpu time 1.765 ms
+// GFlops 1216.958 GBytes 7301.748
+
+// As shown in the last line of Example 2.17 we have gained another 100 GFlops/sec of
+// performance by using loop unrolling. The optimal depth of unrolling can only be found by
+// experiment; on our RTX 2070 the value 16 seems to give the best result. On other GPUs you
+// may ﬁnd a different optimum. Tuning GPU code always involves some experimentation.
+// Note the NVCC compiler will often automatically perform loop unrolling and especially in
+// cases where the number of passes is known at compile time. For this reason, making the loop
+// counter a template parameter can be worthwhile. Here this is done for the inner loop over TS
+// but not for the outer loop over gridDim.x which is therefore not known at compile time.
+// Interestingly, we ﬁnd that explicit unrolling over the outer loop helps but in experiments (not
+// shown) we found explicit unrolling over the inner loop does not help.
+
+// A 1024 x 1024 B 1024 x 1024 gpu time 5.041 ms GFlops 425.966 GBytes 2555.798 (gputiled1)
