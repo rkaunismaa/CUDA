@@ -351,7 +351,9 @@ And why can't I successfully compile the cpp programs using the make file from t
 
 # Monday, July 1, 2024
 
-Continuing to drill through the most excellent book "Programming in Parallel with CUDA"
+Continuing to drill through the most excellent book "Programming in Parallel with CUDA".
+
+Got the cpp stuff compiling and running ... sigh. 
 
 
 

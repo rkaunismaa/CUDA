@@ -51,3 +51,5 @@ int main(int argc,char *argv[])
 		Arow,Acol,Brow,Bcol,t1,gflops);
 	return 0;
 }
+
+// A 1024 x 1024 B 1024 x 1024 host time 1370.238 ms Gflops/sec 1.567

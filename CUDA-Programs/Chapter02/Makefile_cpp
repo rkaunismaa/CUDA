@@ -4,17 +4,20 @@
 # please use "make build NAME=gpusum" etc. to provide program names as necessary
 #
 # This Makefile is for C++ only
+# 
+# run this makefile with ...
+# make -f Makefile_cpp build NAME=hostmult0
 ################################################################################
 
 # default program name. Note use command line option NAME=... as neceessary
 NAME := defaultname
 
-CUDA_PATH := /usr/local/cuda-12.3
+CUDA_PATH := /usr/local/cuda-12.3  # yeah, this does not work! so override ... 
+CUDA_PATH := /usr/local/cuda-12.3/include
 # assumes CUDA samles installed in ~/samples
 NVCUDASAMPLES_ROOT := ~/Data/Documents/Github/NVIDIA/cuda-samples/Common$ 
 # assumes examples installed in directory ~/CudaBook 
 CX_ROOT := ~/Data/Documents/Github/RichardAns/CUDA-Programs/include
-
 
 # Target rules
 all: build
@@ -22,11 +25,13 @@ all: build
 build: $(NAME)
 
 $(NAME): $(NAME).o 
-	g++ -o $(NAME) -O2 -I $(CX_ROOT) $(NAME).o
+	@echo "Compiling source files to create the object files ..."
+	g++ -o $(NAME) -O2 -I $(CX_ROOT) -I $(CUDA_PATH) $(NAME).o
 	cp $(NAME) ../Linux/
 	
 $(NAME).o: $(NAME).cpp
-	g++ -c -O2 -I $(CX_ROOT) $(NAME).cpp
+	@echo "Linking object files to create the executable..."
+	g++ -c -O2 -I $(CX_ROOT) -I $(CUDA_PATH) $(NAME).cpp
     
 run: build
 	$(EXEC) ./$(NAME)

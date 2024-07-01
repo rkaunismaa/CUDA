@@ -13,7 +13,6 @@
 // A 1024 x 1024 B 1024 x 1024 host time 2916.772 ms Gflops/sec 0.736
 
 #include "thrust/host_vector.h"
-//#include "/usr/local/cuda-12.3/targets/x86_64-linux/include/thrust/host_vector.h"
 #include "cxtimers.h"
 #include <random>
 
@@ -52,5 +51,11 @@ int main(int argc,char *argv[])
 		Arow,Acol,Brow,Bcol,t1,gflops);
 	return 0;
 }
+
+// Monday, July 1, 2024 ...
+// A 1024 x 1024 B 1024 x 1024 host time 1979.613 ms Gflops/sec 1.085
+
+// 211_hostmult0 output ... compiled as a cuda program
+// A 1024 x 1024 B 1024 x 1024 host time 5742.313 ms Gflops/sec 0.374
 
 
