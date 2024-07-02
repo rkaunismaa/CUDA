@@ -15,7 +15,7 @@
 #include "cx.h"
 #include "cxtimers.h"              // cx timers
 
-__host__ __device__ inline float sinsum(float x,int terms)
+__host__ __device__ inline float sinsum(float x,int terms) 
 {
 	float x2 = x*x;
 	float term = x;   // first term of series
@@ -29,6 +29,32 @@ __host__ __device__ inline float sinsum(float x,int terms)
 	return sum;
 }
 
+__global__ void gpu_sin(float *sums,int steps,int terms,float step_size) // line 15.1
+{
+	int step = blockIdx.x*blockDim.x + threadIdx.x; // unique thread ID
+
+	// Line 15.4: This is an out-of-range check on the value of step, the kernel will exit at this
+	// point for threads that fail the check.
+	if(step<steps){ // line 15.4
+		// Line 15.5: Calculate the x value corresponding to step.
+		float x = step_size * step; // line 15.5
+		// Line 15.6: Call sinsum with the thread dependant value of x. The result is stored in the
+		//array sums using step as an index.
+		sums[step] = sinsum(x, terms);  // store sin values in array ... line 15.6
+	}
+} // Line 15.7: The kernel exits at here; recall that return statements are not required for void functions in C++.
+
+// The kernel declaration in line 15.1 looks very much like a normal C++ declaration
+// except for the preﬁx __global__. There are, however, some restrictions based on the fact
+// that although the kernel is called from the host it cannot access any memory on the host. All
+// kernels must be declared void and their arguments are restricted to scalar items or pointers
+// to previously allocated regions of device memory. All kernel arguments are passed by value.
+// In particular, references are not allowed. It is not a good idea to try and pass large C++
+// objects to kernels; this is because they will be passed by value and there may be signiﬁcant
+// copying overheads. Also any changes made by the kernel will not be reﬂected back in the
+// host’s copy after the kernel call. Additionally, any C++ classes or structs passed to a kernel
+// must have __device__ versions of all their member functions.
+
 // There is another important point to make about line 15.1. The GPU hardware allocates
 // all the threads in any particular thread block to a single SM unit on the GPU, and these
 // threads are run together very tightly on warp-engines as warps of 32 threads. The variable
@@ -38,15 +64,8 @@ __host__ __device__ inline float sinsum(float x,int terms)
 // block (range 0–7 in our case). Thus, in line 15.6 of the kernel where we store a value in
 // sums[step], the adjacent threads within a given warp have adjacent values of step and
 // so they will address adjacent memory locations in the array sums.
-__global__ void gpu_sin(float *sums,int steps,int terms,float step_size) // line 15.1
-{
-	int step = blockIdx.x*blockDim.x + threadIdx.x; // unique thread ID
 
-	if(step<steps){
-		float x = step_size * step;
-		sums[step] = sinsum(x, terms);  // store sin values in array ... line 15.6
-	}
-}
+
 
 int main(int argc,char *argv[])
 {
@@ -67,6 +86,7 @@ int main(int argc,char *argv[])
 	// the target GPU.6
 	// 4090 has 128 Multiprocessors ... 4x128=512
 	int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps ... line 19.2
+	// for this example, blocks = 39063, (10000000 + 256 -1)/ 256 => 39,063
 
 	double pi = 3.14159265358979323;
 	double step_size = pi / (steps-1); // NB n-1 steps between n points
@@ -82,7 +102,8 @@ int main(int argc,char *argv[])
 	// class. For std::vector objects, the member function data() does this job. While
 	// this function does work for thrust host_vector objects it does not work for
 	// device_vector objects. Therefore we have to use the more complicated cast shown
-	// in this line ...
+	// in this line. As an alternative you could instead use the undocumented data().get()
+	// member function of device_vectors.
 	float *dptr = thrust::raw_pointer_cast(&dsums[0]); // get pointer
 
 	cx::timer tim;

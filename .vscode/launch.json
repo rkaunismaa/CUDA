@@ -7,6 +7,9 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
+        "program": "${workspaceFolder}/CUDA-Programs/Chapter01/13_gpusum",
+        "args": "1000000000"
+
       // "program" : "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplicationRectangles_ChatGPT"
 
 //"program" : "${workspaceFolder}/Massively-Parallel/Chapter04/deviceQuery_GPT"
@@ -37,7 +40,7 @@
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/206_reduce1",
       // "args": "16777216, 288, 256, 1000"
 
-      "program": "${workspaceFolder}/CUDA-Programs/Chapter02/reduce0",
+      // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/reduce0",
 
       //"program": "${workspaceFolder}/CUDA-Programs/Chapter02/209_reduce4",
       // "program": "${workspaceFolder}/CUDA-Programs/Chapter02/208_reduce3",
