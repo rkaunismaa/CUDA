@@ -65,8 +65,6 @@ __global__ void gpu_sin(float *sums,int steps,int terms,float step_size) // line
 // sums[step], the adjacent threads within a given warp have adjacent values of step and
 // so they will address adjacent memory locations in the array sums.
 
-
-
 int main(int argc,char *argv[])
 {
 	int steps = (argc > 1) ? atoi(argv[1]) : 10000000; // get command

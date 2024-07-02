@@ -53,6 +53,9 @@ __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float s
 		float x = step_size*step;
 		sums[step] = sinsum(x, terms);  // save sum
 		step += blockDim.x*gridDim.x; //  large stride to next step. ... line 15.65
+		// blockDim.x = number of threads in one block
+		// gridDim.x = number of blocks in the grid
+		// threads = gridDim.x*blockDim.x is total number of threads in launch
 	}
 }
 
