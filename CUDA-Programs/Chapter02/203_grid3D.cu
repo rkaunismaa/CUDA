@@ -44,16 +44,19 @@
 // __device__  int   a[256][512][512];  // file scope
 // __device__  float b[256][512][512];  // file scope
 
-	// Notice the array dimensions are in order z, y, x going from left to
-	// right, where memory is allocated so the adjacent x values are adjacent in memory. This is standard in
-	// C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
-	// “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
-	// variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
+	
+// Declare two large 3D arrays which have ﬁle scope and so can be used by any of
+// the functions declared later in the same ﬁle. This is standard C/C++ but with an extra CUDA
+// feature. By declaring the arrays with the __device__ preﬁx we are telling the compiler to allocate
+// these arrays in the GPU memory not in the host memory. Thus, the arrays a and b are usable by kernel
+// functions but not host functions.
+// Notice the array dimensions are in order z, y, x going from left to
+// right, where memory is allocated so the adjacent x values are adjacent in memory. This is standard in
+// C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
+// “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
+// variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
 __device__  int   a[256][512][1024];  // file scope
 __device__  float b[256][512][1024];  // file scope
-
-
-
 
 // The kernel grid3D is declared with four arguments which are the array dimensions and id
 // which speciﬁes the thread whose information will be printed
@@ -121,7 +124,6 @@ __global__ void grid3D(int nx, int ny, int nz, int id)
 	// the entire thread grid
 	int thread_rank_in_grid = (block_rank_in_grid * block_size) + thread_rank_in_block;
 
-	
 	// These next 2 lines have nothing to do with the kernel ... 
 	if(x >=nx || y >=ny || z >=nz) return;     // out of range?
 	int array_size = nx * ny * nz;
@@ -172,8 +174,9 @@ int main(int argc,char *argv[])
 	// 32 we are restricted to smaller ranges for y and z as the product of all three is the thread block size
 	// which is limited by hardware to a maximum of 1024.
 
-	dim3 block3d(16, 64, 128); // 16*64*128 = 131072 ... line 35
-	dim3 thread3d(32, 8, 2); // 32*8*2    = 512 ........ line 36
+	//             x,  y,   z
+	dim3 block3d( 16, 64, 128); // 16*64*128 = 131072 ... line 35
+	dim3 thread3d(32,  8,   2); // 32*8*2    = 512 ........ line 36
 
 	// grid3D<<<block3d, thread3d>>>(512, 512, 256, id);
 	grid3D<<<block3d, thread3d>>>(1024, 512, 256, id);
