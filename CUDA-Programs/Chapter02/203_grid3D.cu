@@ -44,7 +44,15 @@
 // __device__  int   a[256][512][512];  // file scope
 // __device__  float b[256][512][512];  // file scope
 
-	
+
+// __constant__ int X = 1024;
+// __constant__ int Y = 512 ;
+// __constant__ int Z = 256 ;
+
+const int X = 1024;
+const int Y = 512 ;
+const int Z = 256 ;
+
 // Declare two large 3D arrays which have ﬁle scope and so can be used by any of
 // the functions declared later in the same ﬁle. This is standard C/C++ but with an extra CUDA
 // feature. By declaring the arrays with the __device__ preﬁx we are telling the compiler to allocate
@@ -55,8 +63,10 @@
 // C/C++ but opposite to Fortran which uses x, y, z order. Apart from array subscripts we will use
 // “natural” x, y, z ordering in our code. This follows CUDA practice where for example a float4
 // variable a has members a.x, a.y, a.z, a.w which are ordered from x to w in memory
-__device__  int   a[256][512][1024];  // file scope
-__device__  float b[256][512][1024];  // file scope
+// __device__  int   a[256][512][1024];  // file scope
+// __device__  float b[256][512][1024];  // file scope
+__device__  int   a[Z][Y][X];  // file scope
+__device__  float b[Z][Y][X];  // file scope
 
 // The kernel grid3D is declared with four arguments which are the array dimensions and id
 // which speciﬁes the thread whose information will be printed
@@ -179,12 +189,30 @@ int main(int argc,char *argv[])
 	dim3 thread3d(32,  8,   2); // 32*8*2    = 512 ........ line 36
 
 	// grid3D<<<block3d, thread3d>>>(512, 512, 256, id);
-	grid3D<<<block3d, thread3d>>>(1024, 512, 256, id);
+	//grid3D<<<block3d, thread3d>>>(1024, 512, 256, id);
+	grid3D<<<block3d, thread3d>>>(X, Y, Z, id);
 
     cudaDeviceSynchronize(); // necessary in Linux to see kernel printf
 
 	return 0;
 }
+
+
+// Tuesday, July 2, 2040
+// 
+// "program": "${workspaceFolder}/CUDA-Programs/Chapter02/203_grid3D",
+//       "args" : "1234567"
+// 
+// --- START ---
+// array size   1024 x 512 x 256 = 134217728
+// thread  grid  16 x  64 x 128 = 131072
+// thread block  32 x   8 x   2 = 512
+// total number of threads in grid 131072 x 512 = 67108864
+// a[4][180][359] = 1234567 
+// b[4][180][359] = 1111.110718 
+// [block_rank_in_grid 2411 x block_size 512] + thread_rank_in_block 135 = thread_rank_in_grid 1234567
+// block_rank_in_grid = 2411 thread_rank_in_block = 135 rank of thread_rank_in_grid = 1234567
+// --- END ---
 
 
 // Thursday, June 27, 2024
