@@ -49,6 +49,10 @@ __global__ void gpu_sin_tla_whileloop(float *sums, int steps, int terms, float s
 {
 	int step = blockIdx.x*blockDim.x + threadIdx.x; // start with unique thread ID
 
+	int blockDimx = blockDim.x ;
+	int gridDimx = gridDim.x ;
+	int blockDimxXgridDimx = blockDimx*gridDimx ;
+
 	while(step<steps){
 		float x = step_size*step;
 		sums[step] = sinsum(x, terms);  // save sum
