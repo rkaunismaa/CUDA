@@ -18,7 +18,7 @@
 
 // Line 1: This kernel uses y as an output array and x as the input array with N elements. The previous
 // reduce1 kernel used x for both input and output.
-__global__ void reduce2(float *y,float *x,int N) // line 1
+__global__ void reduce2(float *y, float *x, int N) // line 1
 {
 	// Line 3: Here we declare the ﬂoat array tsum to be a shared memory array of size determined by the host
 	// at kernel launch time. Shared memory is on-chip and very fast. Each SM has its own block of shared
@@ -33,7 +33,7 @@ __global__ void reduce2(float *y,float *x,int N) // line 1
 	// thread block, tid to the rank of the current thread in the whole grid and stride to the number of
 	// threads in the whole grid.
 	int id = threadIdx.x; // line 4
-	int tid = blockDim.x*blockIdx.x+threadIdx.x; // line 5
+	int tid = blockDim.x*blockIdx.x + threadIdx.x; // line 5
 	int stride = gridDim.x*blockDim.x; // line 6
 
 	// Line 7: Each thread “owns” one element of tsum, tsum[id] for this part of the calculation. Here
@@ -69,13 +69,14 @@ __global__ void reduce2(float *y,float *x,int N) // line 1
 	// synchronicity within 32-thread warps. This will be discussed in the next chapter on cooperative groups.
 	// For now, note further optimisation of this loop is only important for smaller datasets.
 	for(int k=blockDim.x/2; k>0; k /= 2){ // power of 2 reduction loop ... line 10
-		if(id<k) tsum[id] += tsum[id+k];
-		__syncthreads();
+		if(id<k) tsum[id] += tsum[id+k]; // line 11
+		__syncthreads(); // line 12
 	} // line 13
 
 	// Line 14: The ﬁnal block sum accumulated in tsum[0] is stored in the output array y using
 	// blockIdx.x as an index.
 	if(id==0) y[blockIdx.x] = tsum[0]; // store one value per block ... line 14
+
 }
 
 int main(int argc,char *argv[])
@@ -83,13 +84,15 @@ int main(int argc,char *argv[])
 	// Lines 18–20: Here we give the user the option to set the array size N and the launch parameters
 	// blocks and threads. Note blocks needs to be a power of 2 for the reduce2 kernel to
 	// work properly.
-	int N       = (argc > 1) ? 1 << atoi(argv[1]) : 1 << 24; // default 2^24 ... line 18
+	int N       = (argc > 1) ? 1 << atoi(argv[1]) : 1 << 24; // default 2^24 = 16777216 ... line 18
 	int blocks  = (argc > 2) ? atoi(argv[2]) : 256;  // power of 2 ... line 19
 	int threads = (argc > 3) ? atoi(argv[3]) : 256; // line 20
 
 	int nreps   = (argc > 4) ? atoi(argv[4]) : 1000; // set this to 1 for correct answer or >> 1 for timing tests
+
 	thrust::host_vector<float>    x(N);
 	thrust::device_vector<float>  dx(N);
+
 	// • Line 23: We now allocate a device array dy having dimension blocks. This new array will hold
 	// the individual block wide reduction sums.
 	thrust::device_vector<float>  dy(blocks); // line 23
@@ -99,34 +102,43 @@ int main(int argc,char *argv[])
 	std::uniform_real_distribution<float> fran(0.0,1.0);
 	for(int k = 0; k<N; k++) x[k] = fran(gen);
 	dx = x;  // H2D copy (N words)
+
 	cx::timer tim;
+	
 	double host_sum = 0.0;
 	for(int k = 0; k<N; k++) host_sum += x[k]; // host reduce!
 	double t1 = tim.lap_ms();
 
 	// simple GPU reduce for any value of N
 	tim.reset();
+
 	double gpu_sum = 0.0;
-	for(int rep=0;rep<nreps;rep++){
+
+	// again, the book does NOT SHOW THIS FOR LOOP! ... This just allows the user to run this nreps times for timing purposes.
+	for(int rep=0 ; rep<nreps ; rep++){
 
 		// Line 35: Here we call the reduce2 kernel for the ﬁrst time to process the whole dx array with the
 		// block sums being stored in the output array dy. Note the third kernel argument requesting a shared
 		// memory allocation of threads 4-byte ﬂoats for each active thread block. A large value here may
 		// result in reduced occupancy.
-		reduce2<<<blocks,threads,threads*sizeof(float)>>>(dy.data().get(),dx.data().get(),N); // line 35
+		reduce2<<<blocks, threads, threads*sizeof(float) >>>(dy.data().get(), dx.data().get(), N); // line 35
 
 		// Line 36: Here we call reduce2 again but with the array arguments swapped round. This has the result
 		// of causing the values stored in y by the previous kernel call, to themselves be summed with the total
 		// placed in x[0]. This requires a launch conﬁguration of a single thread block of size blocks threads.
-		reduce2<<<     1, blocks, blocks*sizeof(float)>>>(dx.data().get(),dy.data().get(),blocks); // line 36
+		reduce2<<<     1, blocks, blocks*sizeof(float) >>>(dx.data().get(), dy.data().get(), blocks); // line 36
 
 		if(rep==0)  gpu_sum = dx[0];  
 	}
 	cudaDeviceSynchronize();
+
 	double t2 = tim.lap_ms()/nreps;  // time for one pass here
+
 	//double gpu_sum = dx[0]/nreps;          // D2H copy (1 word) 
-	printf("sum of %d numbers: host %.1f %.3f ms GPU %.1f %.3f ms\n",N,host_sum,t1,gpu_sum,t2);
+	printf("sum of %d numbers: host %.1f %.3f ms GPU %.1f %.3f ms\n", N, host_sum, t1, gpu_sum, t2);
+
 	return 0;
+
 }
 // D:\ > reduce2.exe 16777216 256 256
 // sum of 16777216 numbers: host 8388314.9 14.012 ms

@@ -101,6 +101,7 @@ int main(int argc,char *argv[])
 	// reduce1<<< 1,1 >>>(dx.data().get(),threads);
 	// cudaDeviceSynchronize();
 	// SO WHY THE HELL DOES HE EVEN DO THIS STUFF ABOVE??
+	// OK! SO HE DID THIS FOR TIMING TESTS! ... He says this in 207_reduce2 ... so yeah, SET nreps TO 1 FOR YOUR STUFF! ... 
 
 	cudaDeviceSynchronize();
 
