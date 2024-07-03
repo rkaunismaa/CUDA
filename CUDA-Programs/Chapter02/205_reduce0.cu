@@ -47,6 +47,19 @@ __global__ void reduce0(float *x, int m) // line 4 ...
 	// delivering one or more operations for each core on each clock-cycle.
 	x[tid] += x[tid+m];  // line 7
 
+	// the only calculation done by each thread is the above single addition operation. 
+	// This line triggers three global memory operations, namely loading both the values stored in x[tid]
+	// and x[tid+m] into GPU registers and then storing the sum of these values back into
+	// x[tid]. If we could accumulate partial sums in local registers, that would reduce the
+	// number of global memory accesses needed for each addition down to one, which offers a
+	// speed-up by a potential factor of three.
+
+	// Secondly, the host calls the kernel iteratively, halving the array size at each step to
+	// complete the reduction process, leaving the ﬁnal sum in the ﬁrst array element. The effect
+	// of this is to double the number of times the x[tid] += x[tid+m] statement is
+	// performed. If we could instead perform the iteration inside the kernel that could also reduce
+	// the number of memory accesses required.
+
 } // line 8 ...
 
 int main(int argc,char *argv[])
@@ -90,8 +103,8 @@ int main(int argc,char *argv[])
 	tim.reset(); // line 24
 	for(int m = N/2; m>0; m /= 2) { 
 
-		int threads = std::min(256, m);
 		int blocks =  std::max(m/256, 1);
+		int threads = std::min(256, m);
 
 		reduce0<<<blocks,threads>>>( dev_x.data().get(), m); // line 28
 
@@ -101,7 +114,7 @@ int main(int argc,char *argv[])
 
 	// In CUDA programs a kernel launch such as that used in line 28 will not block the host which will
 	// proceed to the next line of the host program without waiting for the kernel call to ﬁnish. In this case
-	// that means all the kernel calls (23 in all for N=2 to the 24) will be rapidly queued to run successively on the
+	// that means all the kernel calls (23 in all for N=2^24) will be rapidly queued to run successively on the
 	// GPU. In principle the host can do other CPU work while these kernels are running on the GPU. In this
 	// case we just want to measure the duration of the reduction operation so before making the time
 	// measurement we must use a cudaDeviceSynchronize call in line 30 which causes the host to
@@ -113,8 +126,7 @@ int main(int argc,char *argv[])
 	double gpu_sum = dev_x[0];  // D2H copy (1 word) // line 32
 	printf("sum of %d random numbers: host %.1f %.3f ms, GPU %.1f %.3f ms\n", N, host_sum, t1, gpu_sum, t2); // line 33
 
-
-	// The bottom line shows the results obtained running this program with the default value of 224 for the
+	// The bottom line shows the results obtained running this program with the default value of 2^24 for the
 	// number of values to be summed. Note the kernel execution time of 0.535 ms is too short a single
 	// measurement to be reliable. The values shown in these reduce examples were in fact obtained as
 	// averages of 10,000 runs using a for loop around kernel calls. An alternative method would be to use
