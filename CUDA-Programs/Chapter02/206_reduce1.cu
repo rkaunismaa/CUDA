@@ -21,12 +21,6 @@
 // own partial sum in its copy of the register variable tsum and then stores the ﬁnal result in x[tid]
 // where tid is the thread’s unique rank in the grid. In this example we have used a for loop instead
 // of a while clause to keep the code compact.
-// Note line 10, where we change the value of an element of x, requires thought. Not all threads actually
-// run at the same time so using the same array for a kernel’s input and output is always potentially
-// dangerous. Can we be sure no thread other than tid needs the original value in x[tid]? If the answer
-// is no, then the kernel would have a race condition and the results would be undeﬁned. In the present
-// case we can be sure because every thread uses a separate disjoint subset of the elements of x. If in doubt
-// you should use different arrays for kernel input and output.
 __global__ void reduce1(float *x, int N) // line 5
 {
 	int tid = (blockDim.x * blockIdx.x) + threadIdx.x;
@@ -39,6 +33,13 @@ __global__ void reduce1(float *x, int N) // line 5
 
 	// store partial sums in the first gridDim.x*blockDim.x elements of x
 	x[tid] = tsum; // line 10
+
+	// Note the above line 10, where we change the value of an element of x, requires thought. Not all threads actually
+	// run at the same time so using the same array for a kernel’s input and output is always potentially
+	// dangerous. Can we be sure no thread other than tid needs the original value in x[tid]? If the answer
+	// is no, then the kernel would have a race condition and the results would be undeﬁned. In the present
+	// case we can be sure because every thread uses a separate disjoint subset of the elements of x. If in doubt
+	// you should use different arrays for kernel input and output.
 }
 
 int main(int argc,char *argv[])
@@ -75,19 +76,31 @@ int main(int argc,char *argv[])
 
 	// Lines 28–32: Replace the for loop in lines 28–32 of the original. Now we make three calls to
 	// reduce1, the ﬁrst uses the full thread-grid deﬁned by the user set variables blocks and
-	// threads. After this call the lower blocks*threads elements of x contain partial sums. The second
-	// kernel call uses just 1 thread block of size threads, after this call the partial sums are in the ﬁrst
-	// threads elements of x. The third call uses just 1 thread to sum threads elements of dx and leave
+	// threads. After this call the lower blocks*threads elements of x contain partial sums. 
+	//
+	// The second kernel call uses just 1 thread block of size threads, after this call the partial sums are in the ﬁrst
+	// threads elements of x. 
+	// 
+	// The third call uses just 1 thread to sum threads elements of dx and leave
 	// to total sum in the ﬁrst element. Clearly the last two kernel calls do not make efﬁcient use of the GPU.
+	// 
 	// Notice that in the last reduce step, line 31 of Example 2.6, we used a single thread running
 	// alone to sum threads values stored in x. We can do better than this by getting the threads
 	// in each thread block to cooperate with each other.
 	for(int rep=0 ; rep<nreps ; rep++){ // line 28
-		reduce1<<< blocks , threads >>>(dev_x.data().get(), N);
-		reduce1<<< 1,       threads >>>(dev_x.data().get(), blocks*threads);
+
+		reduce1<<< blocks , threads >>>(dev_x.data().get(), N); // line 29
+		reduce1<<< 1,       threads >>>(dev_x.data().get(), blocks*threads); // line 30
 		reduce1<<< 1,       1 >>>(      dev_x.data().get(), threads); // line 31
+
 		if (rep==0) gpu_sum = dev_x[0]; // line 32
 	}
+	// The book does NOT show the above for loop, but shows ...
+	// reduce1<<< blocks, threads >>>(dx.data().get(),N); 
+	// reduce1<<< 1, threads >>>(dx.data().get(),blocks*threads);
+	// reduce1<<< 1,1 >>>(dx.data().get(),threads);
+	// cudaDeviceSynchronize();
+	// SO WHY THE HELL DOES HE EVEN DO THIS STUFF ABOVE??
 
 	cudaDeviceSynchronize();
 

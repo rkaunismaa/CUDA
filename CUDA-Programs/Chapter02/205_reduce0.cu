@@ -108,6 +108,8 @@ int main(int argc,char *argv[])
 		int blocks =  std::max(m/256, 1);
 		int threads = std::min(256, m);
 
+		printf("For loop m=%d, blocks=%d, threads=%d, blocks*threads=%d, \n", kernelLaunchCount, blocks, threads, blocks*threads);
+
 		reduce0<<<blocks,threads>>>( dev_x.data().get(), m); // line 28
 
 		kernelLaunchCount++ ;
@@ -149,8 +151,32 @@ int main(int argc,char *argv[])
 // Wednesday, July 3, 3034
 // run from the terminal, not the debugger ... 
 // Kernel Launched 24 times, sum of 16777216 random numbers: host 8389645.1 410.048 ms, GPU 8389646.0 0.242 ms
-// launch in VSCode debug mode ... WAYYY longer to run! ... 37.162 / 0.242 = 153.56 
+// launch in VSCode debug mode ... WAYYY longer to run! ... 37.162 / 0.242 = 153.56 !!
 // Kernel Launched 24 times, sum of 16777216 random numbers: host 8389645.1 411.732 ms, GPU 8389646.0 37.162 ms
+// For loop m=0, blocks=32768, threads=256, blocks*threads=8388608, 
+// For loop m=1, blocks=16384, threads=256, blocks*threads=4194304, 
+// For loop m=2, blocks=8192, threads=256, blocks*threads=2097152, 
+// For loop m=3, blocks=4096, threads=256, blocks*threads=1048576, 
+// For loop m=4, blocks=2048, threads=256, blocks*threads=524288, 
+// For loop m=5, blocks=1024, threads=256, blocks*threads=262144, 
+// For loop m=6, blocks=512, threads=256, blocks*threads=131072, 
+// For loop m=7, blocks=256, threads=256, blocks*threads=65536, 
+// For loop m=8, blocks=128, threads=256, blocks*threads=32768, 
+// For loop m=9, blocks=64, threads=256, blocks*threads=16384, 
+// For loop m=10, blocks=32, threads=256, blocks*threads=8192, 
+// For loop m=11, blocks=16, threads=256, blocks*threads=4096, 
+// For loop m=12, blocks=8, threads=256, blocks*threads=2048, 
+// For loop m=13, blocks=4, threads=256, blocks*threads=1024, 
+// For loop m=14, blocks=2, threads=256, blocks*threads=512, 
+// For loop m=15, blocks=1, threads=256, blocks*threads=256, 
+// For loop m=16, blocks=1, threads=128, blocks*threads=128, 
+// For loop m=17, blocks=1, threads=64, blocks*threads=64, 
+// For loop m=18, blocks=1, threads=32, blocks*threads=32, 
+// For loop m=19, blocks=1, threads=16, blocks*threads=16, 
+// For loop m=20, blocks=1, threads=8, blocks*threads=8, 
+// For loop m=21, blocks=1, threads=4, blocks*threads=4, 
+// For loop m=22, blocks=1, threads=2, blocks*threads=2, 
+// For loop m=23, blocks=1, threads=1, blocks*threads=1, 
 
 // Friday, June 28, 2024
 // My values ...
