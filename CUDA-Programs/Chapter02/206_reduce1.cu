@@ -37,6 +37,7 @@ __global__ void reduce1(float *x, int N) // line 5
 
 	for(int k=tid; k<N; k += stride) tsum += x[k];
 
+	// store partial sums in the first gridDim.x*blockDim.x elements of x
 	x[tid] = tsum; // line 10
 }
 

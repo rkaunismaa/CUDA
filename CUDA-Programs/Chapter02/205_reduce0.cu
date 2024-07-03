@@ -92,6 +92,8 @@ int main(int argc,char *argv[])
 
 	double t1 = tim.lap_ms(); // line 22
 
+	int kernelLaunchCount = 0 ;
+
 	// simple GPU reduce for N = power of 2  
 	// Lines 24–31: Implement the GPU-based parallel iteration of Algorithm 1. For each pass through the
 	// for loop the reduce0 kernel called in line 28 causes the top half of the array dev_x to be
@@ -107,6 +109,8 @@ int main(int argc,char *argv[])
 		int threads = std::min(256, m);
 
 		reduce0<<<blocks,threads>>>( dev_x.data().get(), m); // line 28
+
+		kernelLaunchCount++ ;
 
 	} // line 29
 	cudaDeviceSynchronize();  // line 30
@@ -124,7 +128,7 @@ int main(int argc,char *argv[])
 	// Lines 32–33: Here we copy the ﬁnal sum in the dev_x[0] back to the host, again using thrust, and
 	// print results.
 	double gpu_sum = dev_x[0];  // D2H copy (1 word) // line 32
-	printf("sum of %d random numbers: host %.1f %.3f ms, GPU %.1f %.3f ms\n", N, host_sum, t1, gpu_sum, t2); // line 33
+	printf("Kernel Launched %d times, sum of %d random numbers: host %.1f %.3f ms, GPU %.1f %.3f ms\n", kernelLaunchCount, N, host_sum, t1, gpu_sum, t2); // line 33
 
 	// The bottom line shows the results obtained running this program with the default value of 2^24 for the
 	// number of values to be summed. Note the kernel execution time of 0.535 ms is too short a single
@@ -140,6 +144,13 @@ int main(int argc,char *argv[])
 // D:\ > reduce0.exe
 // sum of 16777216 random numbers: host 8388314.9 14.012 ms
 // GPU 8388315.0 0.535 ms
+
+
+// Wednesday, July 3, 3034
+// run from the terminal, not the debugger ... 
+// Kernel Launched 24 times, sum of 16777216 random numbers: host 8389645.1 410.048 ms, GPU 8389646.0 0.242 ms
+// launch in VSCode debug mode ... WAYYY longer to run! ... 37.162 / 0.242 = 153.56 
+// Kernel Launched 24 times, sum of 16777216 random numbers: host 8389645.1 411.732 ms, GPU 8389646.0 37.162 ms
 
 // Friday, June 28, 2024
 // My values ...
