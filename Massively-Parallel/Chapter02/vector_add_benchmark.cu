@@ -92,6 +92,8 @@ int main(int argc, char *argv[]) {
 
     int N = 1 << P; // Size of vectors
 
+    printf("N = %d\n", N) ;
+
     // Test different block sizes
     int blockSizes[] = {128, 256, 512, 1024};
     for (int blockSize : blockSizes) {
@@ -100,3 +102,29 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+//   "program": "${workspaceFolder}/Massively-Parallel/Chapter02/vector_add_benchmark",
+
+// "args": "28"
+// N = 268435456
+// 268,435,456
+// Block size: 128, Time: 0.0553937 seconds
+// Block size: 256, Time: 0.0479905 seconds
+// Block size: 512, Time: 0.00651844 seconds
+// Block size: 1024, Time: 0.00714984 seconds
+
+// "args": "29"
+// N = 536870912
+// 536,870,912
+// Block size: 128, Time: 0.0981011 seconds
+// Block size: 256, Time: 0.00993524 seconds
+// Block size: 512, Time: 0.00999412 seconds
+// Block size: 1024, Time: 0.0595408 seconds
+
+// "args": "30"
+// N = 1073741824 
+// 1,073,741,824
+// Block size: 128, Time: 0.0667689 seconds
+// Block size: 256, Time: 0.0167821 seconds
+// Block size: 512, Time: 0.0386362 seconds
+// Block size: 1024, Time: 0.0187552 seconds
