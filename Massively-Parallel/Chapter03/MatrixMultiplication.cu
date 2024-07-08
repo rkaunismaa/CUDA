@@ -1,4 +1,5 @@
 // Created by ChatGPT
+// https://chatgpt.com/c/a7e969fd-3d8d-425c-86af-97fb33d9c3f8
 
 #include <iostream>
 #include <cuda_runtime.h>
@@ -19,6 +20,7 @@ __global__ void matrixMulKernel(float* A, float* B, float* C, int m, int n, int 
 }
 
 int main(int argc, char* argv[]) {
+    
     if (argc != 4) {
         std::cerr << "Usage: " << argv[0] << " <m> <n> <p>" << std::endl;
         return 1;

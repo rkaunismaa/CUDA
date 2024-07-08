@@ -59,10 +59,13 @@ __global__ void matrixMul(float *d_A, float *d_B, float *d_C, int width) {
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     
     if (row < width && col < width) {
+
         float Cvalue = 0.0;
+        
         for (int k = 0; k < width; ++k) {
             Cvalue += d_A[row * width + k] * d_B[k * width + col];
         }
+
         d_C[row * width + col] = Cvalue;
     }
 }
