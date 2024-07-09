@@ -37,6 +37,10 @@ __global__ void matrixMulTiled(float *d_A, float *d_B, float *d_C, int width) {
     int Col = bx * TILE_WIDTH + tx;
 
     float Cvalue = 0.0;
+
+    // width / TILE_WIDTH =  36864 / 32 = 1152 => Total number of tiles in the x direction and the y direction, 
+    // cuz it's a square matrix.
+
     // Loop over the d_A and d_B tiles required to compute the d_C element
     for (int m = 0; m < (width / TILE_WIDTH); ++m) {
 

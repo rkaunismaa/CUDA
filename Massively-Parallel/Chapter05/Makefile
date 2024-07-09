@@ -17,7 +17,8 @@ CUDA_LIB = /usr/local/cuda/lib64
 # Source files
 # SRCS = Color2GreyScale.cu
 # SRCS = tiledMatrixMultiplicationRectangles_ChatGPT.cu
-SRCS = tiledMatrixMultiplication_ChatGPT.cu
+# SRCS = tiledMatrixMultiplication_ChatGPT.cu
+SRCS = tiledMatrixMultiplication_Claude.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
@@ -25,7 +26,8 @@ OBJS = $(SRCS:.cu=.o)
 # Output binary
 # TARGET = Color2GreyScale
 # TARGET = tiledMatrixMultiplicationRectangles_ChatGPT
-TARGET = tiledMatrixMultiplication_ChatGPT
+# TARGET = tiledMatrixMultiplication_ChatGPT
+TARGET = tiledMatrixMultiplication_Claude
 
 # Compile CUDA source file to object file
 %.o: %.cu
