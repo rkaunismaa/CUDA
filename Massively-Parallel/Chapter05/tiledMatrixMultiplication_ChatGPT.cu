@@ -14,6 +14,10 @@
 // Tile Width: 32, Time elapsed: 3 minutes 56 seconds
 // NO TILING! : Time elapsed: 3 minutes 50 seconds
 
+// Tuesday, July 9, 2024
+// Tile Width: 32, Time elapsed: 3 minutes 56 seconds
+// NO TILING! : Time elapsed: 3 minutes 51 seconds
+
 #include <stdio.h>
 #include <cuda_runtime.h>
 
@@ -154,16 +158,13 @@ int main() {
     // Output the timing result
     printf("NO TILING! : Time elapsed: %d minutes %d seconds\n", minutes, seconds);
 
-
-
-
     cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
     // Check the result (for example, print some of the values)
-    for (int i = 0; i < 10; i++) {
-        printf("%f ", h_C[i]);
-    }
-    printf("\n");
+    // for (int i = 0; i < 10; i++) {
+    //     printf("%f ", h_C[i]);
+    // }
+    // printf("\n");
 
     free(h_A);
     free(h_B);
