@@ -50,5 +50,7 @@ Added tiledMatrixMultiplicationRectangles_ChatGPT.cu to demonstrate tiled matrix
 
 <img src="../images/Figure_6.4.png" alt="Figure 6.4" width="300">
 
-Damn! I had Claude generate the CUDA kernel code from the above image!
+Damn! I had [Claude](https://claude.ai/chat/39b1cea7-51b4-4285-b0a7-d0a79661b328) generate the CUDA kernel code from the above image!
+
+
 
