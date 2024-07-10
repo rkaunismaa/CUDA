@@ -378,6 +378,8 @@ Warp Size: 32 threads
 
 I also asked [Create a spreadsheet that displays the differences between a NVIDIA RTX 2070 Super and a 4090 gpu.](https://chatgpt.com/c/a768e672-74c0-496b-91c1-c3a0b870901f) and got RTX_2070_Super_vs_RTX_4090.xlsx. I then asked "Also include the 1050", and got GTX_1050_vs_RTX_2070_Super_vs_RTX_4090.xlsx.
 
+# Wednesday, July 10, 2024
 
+Moving onto 'Chapter 6 - Performance considerations' of the book 'Programming Massively Parallel Processors'.
 
 

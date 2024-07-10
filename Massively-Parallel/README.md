@@ -45,3 +45,10 @@ So I thought adjusting the tile size would have a big impact on the processing s
 #### Monday, June 24, 2024
 
 Added tiledMatrixMultiplicationRectangles_ChatGPT.cu to demonstrate tiled matrix multiplcation of rectangles. 
+
+#### Wednesday, July 10, 2024
+
+<img src="../images/Figure_6.4.png" alt="Figure 6.4" width="300">
+
+Damn! I had Claude generate the CUDA kernel code from the above image!
+
