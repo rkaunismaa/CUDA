@@ -389,3 +389,7 @@ Moving onto 'Chapter 6 - Performance considerations' of the book 'Programming Ma
 [2D tiled convolution example by Claude](https://claude.ai/chat/f21125f2-40a4-4bf1-a799-6be5cc4694c7)
 
 Dumped in the NVIDIA cuda samples 'convolutionSeparable' code sample into this repo and was able to compile and run the code. 
+
+Hmmm that convolutionSeparable folder came with its own .vscode folder. How to I get the debugger to use that instead of the root .vscode folder?? I want to step through the code using the "Nsight Visual Studio Code Edition" plugin ... 
+
+Tried a simple hack ... rename the root '.vscode' folder to '_.vscode' then hit F5 when in the main.cpp program. VSCode generated a new root '.vscode' folder and asked a few things, I selected some defaults, but it did not run the code ... meh ... may look into this later.
