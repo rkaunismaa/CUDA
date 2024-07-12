@@ -387,3 +387,5 @@ Moving onto 'Chapter 6 - Performance considerations' of the book 'Programming Ma
 [Intro to Parallel Programming CUDA - Udacity 458](https://www.youtube.com/playlist?list=PLnH7E0IG44jFfiQBd_Ov7FmYHq8SZx6r0)
 
 [2D tiled convolution example by Claude](https://claude.ai/chat/f21125f2-40a4-4bf1-a799-6be5cc4694c7)
+
+Dumped in the NVIDIA cuda samples 'convolutionSeparable' code sample into this repo and was able to compile and run the code. 
