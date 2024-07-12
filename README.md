@@ -382,4 +382,8 @@ I also asked [Create a spreadsheet that displays the differences between a NVIDI
 
 Moving onto 'Chapter 6 - Performance considerations' of the book 'Programming Massively Parallel Processors'.
 
+# Friday, July 12, 2024
+
+[Intro to Parallel Programming CUDA - Udacity 458](https://www.youtube.com/playlist?list=PLnH7E0IG44jFfiQBd_Ov7FmYHq8SZx6r0)
+
 
