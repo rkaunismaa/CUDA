@@ -7,8 +7,10 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
-      "program": "${workspaceFolder}/Massively-Parallel/Chapter02/vector_add_benchmark",
-      "args": "30"
+      "program": "${workspaceFolder}/Massively-Parallel/Chapter07/conv2d_tiled",
+
+      // "program": "${workspaceFolder}/Massively-Parallel/Chapter02/vector_add_benchmark",
+      // "args": "30"
 
         // "program": "${workspaceFolder}/CUDA-Programs/Chapter01/13_gpusum",
         // "args": "1000000000"

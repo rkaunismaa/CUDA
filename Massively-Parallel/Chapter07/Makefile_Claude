@@ -1,0 +1,45 @@
+# Compiler
+NVCC := nvcc
+
+# Compiler flags
+NVCC_FLAGS := -O3 -arch=sm_60
+
+# Debug flags
+DEBUG_FLAGS := -g -G
+
+# Target executable names
+TARGET := conv2d_tiled
+DEBUG_TARGET := $(TARGET)_debug
+
+# Source file
+SRC := conv2d_tiled.cu
+
+# Object files
+OBJ := $(SRC:.cu=.o)
+DEBUG_OBJ := $(SRC:.cu=_debug.o)
+
+# Default target
+all: $(TARGET) $(DEBUG_TARGET)
+
+# Rule to build the optimized target
+$(TARGET): $(OBJ)
+	$(NVCC) $(NVCC_FLAGS) $^ -o $@
+
+# Rule to build the debug target
+$(DEBUG_TARGET): $(DEBUG_OBJ)
+	$(NVCC) $(NVCC_FLAGS) $(DEBUG_FLAGS) $^ -o $@
+
+# Rule to build optimized object files
+%.o: %.cu
+	$(NVCC) $(NVCC_FLAGS) -c $< -o $@
+
+# Rule to build debug object files
+%_debug.o: %.cu
+	$(NVCC) $(NVCC_FLAGS) $(DEBUG_FLAGS) -c $< -o $@
+
+# Clean rule
+clean:
+	rm -f $(OBJ) $(DEBUG_OBJ) $(TARGET) $(DEBUG_TARGET)
+
+# Phony targets
+.PHONY: all clean
