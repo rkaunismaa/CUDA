@@ -393,3 +393,13 @@ Dumped in the NVIDIA cuda samples 'convolutionSeparable' code sample into this r
 Hmmm that convolutionSeparable folder came with its own .vscode folder. How to I get the debugger to use that instead of the root .vscode folder?? I want to step through the code using the "Nsight Visual Studio Code Edition" plugin ... 
 
 Tried a simple hack ... rename the root '.vscode' folder to '_.vscode' then hit F5 when in the main.cpp program. VSCode generated a new root '.vscode' folder and asked a few things, I selected some defaults, but it did not run the code ... meh ... may look into this later.
+
+# Tuesday, August 27, 2024
+
+Yup, getting back to CUDA, just cuz I still think this is worth knowing and REALLY understanding ... 
+
+Tried compiling "Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2.cu" by running 'make' from a terminal in that folder, and got errors about opencv-4 missing! ... fack. 
+
+Previous notes mentions running "sudo apt install libopencv-dev" to install opencv ... gonna look into opencv on KAUWITB ... 
+
+OK ... got it to run. Nice. 

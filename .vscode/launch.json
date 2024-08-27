@@ -7,7 +7,10 @@
       "request": "launch",
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
-      "program": "${workspaceFolder}/Massively-Parallel/Chapter07/conv2d_tiled",
+      "program": "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2",
+      "args" : "32, 36864, 36864, 36864, 1"
+
+      // "program": "${workspaceFolder}/Massively-Parallel/Chapter07/conv2d_tiled",
 
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter02/vector_add_benchmark",
       // "args": "30"
