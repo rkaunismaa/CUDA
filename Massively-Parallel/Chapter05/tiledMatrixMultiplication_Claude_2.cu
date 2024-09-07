@@ -1,6 +1,18 @@
 // Tuesday, July 9, 2024
 // https://claude.ai/chat/6a75fd89-2603-4b25-b6ae-2d22eef251ed
 
+// Saturday, September 7, 2024
+// Running this on the kitchen computer that has the 2070 super installed as the main and only gpu ... 
+//     "program": "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2",
+ //    "args" : "32, 16384, 16384, 16384, 1" 
+// Running tiled matrix multiplication kernel
+// Kernel execution time : 0 minutes 0 seconds
+// Matrix multiplication completed. All values non-negative: Yes
+// Subset of the result matrix:
+// 5
+// .000000 0.000000 0.000000 0.000000 0.000000 
+
+
 
 // Tuesday, August 27, 2024
 // "program": "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2",
