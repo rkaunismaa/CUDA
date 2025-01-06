@@ -403,3 +403,13 @@ Tried compiling "Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2
 Previous notes mentions running "sudo apt install libopencv-dev" to install opencv ... gonna look into opencv on KAUWITB ... 
 
 OK ... got it to run. Nice. 
+
+# Saturday, September 7, 2024
+
+Running this from the new kitchen computer, just to validate all CUDA stuff is well from this box ... 
+
+Right ... again, getting the opencv-4 missing message ... gonna run "sudo apt install libopencv-dev" ... tried to debug through "Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2.cu" and had to lower the command line parameters to get it to run which it did ... nice. 
+
+## Monday, January 6, 2025
+
+Yup, gonna get back to this today. I didn't realize it's been since September that I last visited this space ... damn. 

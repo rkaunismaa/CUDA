@@ -8,7 +8,9 @@
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
       "program": "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2",
-      "args" : "32, 36864, 36864, 36864, 1"
+      //"args" : "32, 32768, 32768, 32768, 1" 
+      "args" : "32, 16384, 16384, 16384, 1" 
+      // "args" : "32, 36864, 36864, 36864, 1" 
 
       // "program": "${workspaceFolder}/Massively-Parallel/Chapter07/conv2d_tiled",
 
