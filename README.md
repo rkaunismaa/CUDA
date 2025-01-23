@@ -419,3 +419,5 @@ Yup, gonna get back to this today. I didn't realize it's been since September th
 Sigh ... I did NOT get back to this on January 6, but will today, right now ... the goal is to get through the book "Programming Massively Parallel Processors" by the end of February.
 
 [The Illinois-NVIDIA GPU Teaching Kit ](http://gputeachingkit.hwu.crhc.illinois.edu/)
+
+So now on KAUWITB, trying to compile Massively-Parallel/Chapter02/vector_add_benchmark, and I am getting that "No package 'opencv4' found" error ... looking at previous notes, the fix was to run "sudo apt install libopencv-dev", so I tried that and yeah that error goes away ... but why do I keep running into this problem??
