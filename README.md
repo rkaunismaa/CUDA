@@ -413,3 +413,9 @@ Right ... again, getting the opencv-4 missing message ... gonna run "sudo apt in
 ## Monday, January 6, 2025
 
 Yup, gonna get back to this today. I didn't realize it's been since September that I last visited this space ... damn. 
+
+## Thursday, January 23, 2025
+
+Sigh ... I did NOT get back to this on January 6, but will today, right now ... the goal is to get through the book "Programming Massively Parallel Processors" by the end of February.
+
+[The Illinois-NVIDIA GPU Teaching Kit ](http://gputeachingkit.hwu.crhc.illinois.edu/)
