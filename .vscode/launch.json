@@ -8,7 +8,7 @@
       "debuggerPath": "/usr/local/cuda/bin/cuda-gdb",
 
       "program": "${workspaceFolder}/Massively-Parallel/Chapter02/vector_add",
-      "args": "16"
+      "args": "28"
 
       //"program": "${workspaceFolder}/Massively-Parallel/Chapter05/tiledMatrixMultiplication_Claude_2",
       //"args" : "32, 32768, 32768, 32768, 1" 

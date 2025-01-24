@@ -424,4 +424,6 @@ So now on KAUWITB, trying to compile Massively-Parallel/Chapter02/vector_add_ben
 
 ## Friday, January 24, 2025
 
-Trying to compile on the kitchen computer, and am getting the same "No package 'opencv4' found" error message! 
+Trying to compile on the kitchen computer, and am getting the same "No package 'opencv4' found" error message!
+
+Ok! Seems like stuff is working both on KAUWITB and the kitchen computer. ... I really need to come up with a meaningful name for the kitchen computer ... 
