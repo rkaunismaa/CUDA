@@ -14,17 +14,18 @@ OPENCV_LIBS = $(shell pkg-config --libs opencv4)
 CUDA_INC = /usr/local/cuda/include
 CUDA_LIB = /usr/local/cuda/lib64
 
-# Name of the source file and target (passed via command line)
-NAME ?= vector_add
-
-# Source file
-SRCS = $(NAME).cu
+# Source files
+# SRCS = Color2GreyScale.cu
+# SRCS = vector_add_benchmark.cu
+SRCS = vector_add.cu
 
 # Object files
 OBJS = $(SRCS:.cu=.o)
 
 # Output binary
-TARGET = $(NAME)
+# TARGET = Color2GreyScale
+# TARGET = vector_add_benchmark
+TARGET = vector_add
 
 # Compile CUDA source file to object file
 %.o: %.cu
