@@ -435,3 +435,5 @@ Lots of great resouces on Youtube ... and yeah, there are no shortcuts with any 
 [ECE 408 ACS 2022 Fall](https://www.youtube.com/playlist?list=PL6RdenZrxrw-UKfRL5smPfFFpeqwN3Dsz)
 
 [Nvidia Developer](https://www.youtube.com/@NVIDIADeveloper/featured)
+
+[CUDA Training Series](https://www.youtube.com/watch?v=OsK8YFHTtNs&list=PL6RdenZrxrw-zNX7uuGppWETdxt_JxdMj)
