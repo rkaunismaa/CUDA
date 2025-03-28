@@ -437,3 +437,7 @@ Lots of great resouces on Youtube ... and yeah, there are no shortcuts with any 
 [Nvidia Developer](https://www.youtube.com/@NVIDIADeveloper/featured)
 
 [CUDA Training Series](https://www.youtube.com/watch?v=OsK8YFHTtNs&list=PL6RdenZrxrw-zNX7uuGppWETdxt_JxdMj)
+
+## Tuesday, March 25, 2025
+
+Sigh ... yup, once again gonna try to get back to the book "Programming Massively Parallel Processors" and stick with it ... 
